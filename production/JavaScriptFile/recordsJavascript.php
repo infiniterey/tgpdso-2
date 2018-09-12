@@ -45,7 +45,7 @@ function handler()
 	{
 		var date1 = document.getElementById('policyIssueDate').value;
 		var dateObj = new Date(date1);
-		var dt = dateObj.addMonths(4);
+		var dt = dateObj.addMonths(mons);
 		var newdate = dt.getFullYear() + '-' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '-' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
 		policyDueDate.value = newdate;
 	}

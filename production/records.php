@@ -713,14 +713,13 @@
 																											<td style="width: 10px;"><?php echo $row['payment_remarks']; ?></td>
 																										<?php
 																									}
-																									else {
-																										?>
-																										<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month']." month(s)"; ?></td>
-																										<?php
+																									else
+																									{
+																											?>
+																											<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month']." month(s)"; ?></td>
+																											<?php
 																									}
 																									?>
-
-
 																									<td style="width: 10px;"><?php echo $row['payment_MOP']; ?></td>
 																									<td><?php echo $row['payment_dueDate']; ?></td>
 																									<td><?php echo $row['payment_nextDue']; ?></td>
