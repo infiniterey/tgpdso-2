@@ -20,46 +20,37 @@ else
 						<script>var selectedValue = document.getElementById('policyMOP').value;</script>
 						<script> document.getElementById('sampleDueDate').value = '<?php echo $row['payment_nextDue'];?>';</script>
 						<script>
+					//	document.getElementById('paymentmodeOfPayment').value = '<?php echo $row['payment_MOP']?>';
 						var selectedValue = document.getElementById('policyMOP').value;
 						if(selectedValue == "Monthly")
 						{
-							var datehere = document.getElementById("sampleDueDate").value;
-							var dateObj = new Date(datehere);
-							var dt = dateObj.addMonths(1);
-							var newdate = dt.getFullYear() + '-' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '-' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
-							$('#policyDueDate').val(newdate);
-							$('#paymentNextDue').val(newdate);
+							var editMOP = 1;
 						}
 						else if(selectedValue == "Quarterly")
 						{
-							var datehere = document.getElementById("sampleDueDate").value;
-							var dateObj = new Date(datehere);
-							var dt = dateObj.addMonths(4);
-							var newdate = dt.getFullYear() + '-' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '-' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
-							$('#policyDueDate').val(newdate);
-							$('#paymentNextDue').val(newdate);
+							var editMOP = 3;
 						}
 						else if(selectedValue == "Semi-Annual")
 						{
-							var datehere = document.getElementById("sampleDueDate").value;
-							var dateObj = new Date(datehere);
-							var dt = dateObj.addMonths(6);
-							var newdate = dt.getFullYear() + '-' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '-' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
-							$('#policyDueDate').val(newdate);
-							$('#paymentNextDue').val(newdate);
+							var editMOP = 6;
 						}
 						else if(selectedValue == "Annual")
 						{
-							var datehere = document.getElementById("sampleDueDate").value;
-							var dateObj = new Date(datehere);
-							var dt = dateObj.addMonths(12);
-							var newdate = dt.getFullYear() + '-' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '-' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
-							$('#policyDueDate').val(newdate);
-							$('#paymentNextDue').val(newdate);
+							var editMOP = 12;
 						}
 						</script>
 						<?php
 					}
+					?>
+					<script>
+					var datehere = document.getElementById("sampleDueDate").value;
+					var dateObj = new Date(datehere);
+					var dt = dateObj.addMonths(editMOP);
+					var newdate = dt.getFullYear() + '-' + (((dt.getMonth() + 1) < 10) ? '0' : '') + (dt.getMonth() + 1) + '-' + ((dt.getDate() < 10) ? '0' : '') + dt.getDate();
+					$('#policyDueDate').val(newdate);
+					$('#paymentNextDue').val(newdate);
+				</script>
+				<?php
 				}
 				$conn->close();
 	}
@@ -114,6 +105,7 @@ include 'PHPFile/Connection_Database.php';
 							<script> document.getElementById('policyPremium').value = '<?php echo $row['premium'];?>';</script>
 							<script> document.getElementById('policyDueDate').value = '<?php echo $row['dueDate'];?>';</script>
 							<script> document.getElementById('planName').value = '<?php echo $row['planCode'];?>';</script>
+
 
 							<script> document.getElementById('paymentPolicyNo').value = '<?php echo $row['policyNo'];?>';</script>
 							<script> document.getElementById('paymentAmount').value = '<?php echo $row['faceAmount'];?>';</script>

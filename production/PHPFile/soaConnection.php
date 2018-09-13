@@ -14,6 +14,13 @@ $(document).ready(function() {
     } );
 } );
 
+
+$(document).ready(function() {
+    $('#datatable-fixed-header009').DataTable( {
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+    } );
+} );
+
 </script>
 
 <script>

@@ -49,13 +49,14 @@
       <input type="date" class="form-control aswidth" name="paymentDueDate" id="paymentDueDate">
       <input type="date" name="paymentNextDue" id="paymentNextDue" hidden>
       <input type="date" name="paymentNextDueADD" id="paymentNextDueADD" hidden>
+      <input type="text" name="dateText" id="dateText" hidden>
       <br>
        <br>
      </div>
  </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" style="width: 100px;" name="paymentSaveButton" id="paymentSaveButton" onclick="post();"><i class="fa fa-check"></i>&nbsp;&nbsp;Save</button>
+        <button type="submit" class="btn btn-primary" style="width: 100px;" name="paymentSaveButton" id="paymentSaveButton" onlick="post();"><i class="fa fa-check"></i>&nbsp;&nbsp;Save</button>
         <!--<button type="button" class="btn btn-default" style="width: 100px;" data-dismiss="modal">Close</button>-->
       </div>
     </form>
@@ -90,12 +91,19 @@ include 'PHPFile/Connection_Database.php';
           $paymentRemarks = "New";
 
           $add = $_POST['paymentPolicyNo'];
-          //$query = "SELECT * FROM payment, production WHERE payment_nextDue = dueDate AND payment_policyNo = policyNo AND policyNo = '$add' ORDER BY DESC";
+          //$query = "SELECT * FROM payment, production WHERE payment_nextDue = dueDate AND payment_policyNo = policyNo AND policyNo = '$add' ORDER BY DESC
+
           $query = "SELECT * FROM payment WHERE payment_policyNo = '$add' ORDER BY payment_ID DESC LIMIT 1";
           $data = mysqli_query($conn, $query);
           $result = mysqli_num_rows($data);
           if($result == 1)
           {
+            $paymentYearRemarks = "0";
+            $paymentMonthRemarks = "0";
+            $nextDueDateResult = "";
+
+            $paymentMOP = $_POST['paymentmodeOfPayment'];
+
             while($row=mysqli_fetch_Array($data))
             {
               $paymentYearRemarks = $paymentYearRemarks.$row['payment_remarks_year'];
@@ -103,10 +111,21 @@ include 'PHPFile/Connection_Database.php';
 
               $nextDueDateResult = $nextDueDateResult.$row['payment_nextDue'];
             }
+
               switch($paymentMOP)
               {
                   case "Monthly":
-                  $calculateMonth = $paymentMonthRemarks + "1";
+
+                  if($paymentMonthRemarks <= "12")
+                  {
+                    $calculateMonth = $paymentMonthRemarks + "1";
+                    $calculateYear = $paymentYearRemarks + "0";
+                  }
+                  else if($paymentMonthRemarks >= "13")
+                  {
+                    $calculateMonth = "1";
+                    $calculateYear = $paymentYearRemarks + "1";
+                  }
 
                   ?>
                   <script>
@@ -116,17 +135,52 @@ include 'PHPFile/Connection_Database.php';
 
                   break;
                   case "Quarterly":
-                  $calculateMonth = $paymentMonthRemarks + "3";
+                  if($paymentMonthRemarks == "3" || $paymentMonthRemarks == "6" || $paymentMonthRemarks == "9")
+                  {
+                    $calculateMonth = $paymentMonthRemarks + "3";
+                    $calculateYear = $paymentYearRemarks + "0";
+                  }
+                  else if($paymentMonthRemarks >= "12")
+                  {
+                    $calculateMonth = "1";
+                    $calculateYear = $paymentYearRemarks + "1";
+                  }
+                  else
+                  {
+                    ?>
+                    <script>alert('Quarterly does not accept within that month.');</script>
+                    <?php
+                    return;
+                  }
+
+
 
                   ?>
                   <script>
-                      var month = 4;
+                      var month = 3;
                   </script>
                   <?php
 
                   break;
                   case "Semi-Annual":
-                  $calculateMonth = $paymentMonthRemarks + "6";
+                  if($paymentMonthRemarks == "6")
+                  {
+                    $calculateMonth = $paymentMonthRemarks + "6";
+                    $calculateYear = $paymentYearRemarks;
+                  }
+                  else if($paymentMonthRemarks >= "12")
+                  {
+                    $calculateMonth = "1";
+                    $calculateYear = $paymentYearRemarks + "1";
+                  }
+                  else
+                  {
+                    ?>
+                    <script>alert('Semi-Annual does not accept within that month.');</script>
+                    <?php
+                    return;
+                  }
+
 
                   ?>
                   <script>
@@ -136,9 +190,19 @@ include 'PHPFile/Connection_Database.php';
 
                   break;
                   case "Annual":
-                  $calculateMonth = 0;
-                  $calculateYear = $paymentYearRemarks + "1";
 
+                  if($paymentMonthRemarks == "1")
+                  {
+                    $calculateMonth = "1";
+                    $calculateYear = $paymentYearRemarks + "1";
+                  }
+                  else
+                  {
+                    ?>
+                    <script>alert('Annual does not accept within that month.');</script>
+                    <?php
+                    return;
+                  }
 
                   ?>
                   <script>
@@ -181,9 +245,12 @@ include 'PHPFile/Connection_Database.php';
 
                 var resultDate = "<?php echo $nextDueDateResult; ?>";
                 var dateObjective = new Date(resultDate);
-
+                alert(resultDate);
                 var dateTimeObject = dateObjective.addMonths(month);
                 var newdateResult= dateTimeObject.getFullYear() + '-' + (((dateTimeObject.getMonth() + 1) < 10) ? '0' : '') + (dateTimeObject.getMonth() + 1) + '-' + ((dateTimeObject.getDate() < 10) ? '0' : '') + dateTimeObject.getDate();
+
+                // document.getElementById('dateText').value = newdateResult;
+
 
                 function post()
                 {
@@ -198,7 +265,20 @@ include 'PHPFile/Connection_Database.php';
               </script>
               <?php
               $nextDueResulter = $_POST['paymentNextDue'];
+
+
               // if($paymentMonthRemarks == "12")
+              // {
+              //   $calculateMonth = $paymentMonthRemarks - "12";
+              //   $calculateYear = $paymentYearRemarks + "1";
+              // }
+
+              // if($paymentMonthRemarks == "3" || $paymentMonthRemarks == "6")
+              // {
+              //   $calculateMonth = $paymentMonthRemarks + "3";
+              //   $calculateYear = $paymentYearRemarks;
+              // }
+              // else if($paymentMonthRemarks == "12")
               // {
               //   $calculateMonth = $paymentMonthRemarks - "12";
               //   $calculateYear = $paymentYearRemarks + "1";

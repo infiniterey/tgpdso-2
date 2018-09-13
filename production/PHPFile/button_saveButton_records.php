@@ -51,7 +51,7 @@ include 'PHPFile/Connection_Database.php';
             insured_address = '$insuredAddress',
             insured_contactNo = '$insuredContact',
             plan = '$plan',
-            rate = '$policyRate',
+
             faceAmount = '$faceAmount',
             modeOfPayment = '$MOP',
             issuedDate = '$issueDate',
@@ -245,7 +245,6 @@ include 'PHPFile/Connection_Database.php';
                       {
                         $sql = "UPDATE production
                         SET plan = '$plan',
-                        rate = '$policyRate',
                         faceAmount = '$faceAmount',
                         modeOfPayment = '$MOP',
                         issuedDate = '$issueDate',

@@ -206,6 +206,9 @@ overflow-y:auto;
 <div class="modal fade" name="searchAgent" id="searchAgent" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 	<?php include 'PHPFile/button_searchAgent_addSOA.php'; ?>
 </div>
+<div class="modal fade" name="searchAgentUpdate" id="searchAgentUpdate" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+	<?php include 'PHPFile/button_searchAgent_updateSOA.php'; ?>
+</div>
 	<footer style="margin-bottom: -15px;">
 		<center>
 			COPYRIGHT 2018 | TGP DISTRICT SALES OFFICE

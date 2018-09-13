@@ -11,11 +11,12 @@
         die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
       }
       else {
-			if(isset($_GET['deletePayment']))
+			if(isset($_GET['deletePayment']) && isset($_GET['list']))
 			{
 				$delete = $_GET['deletePayment'];
+        $list = $_GET['list'];
 
-				$sql = "DELETE FROM payment WHERE payment_policyNo = '$delete'";
+				$sql = "DELETE FROM payment WHERE payment_policyNo = '$delete' AND payment_ID = '$list'";
 
 				if($conn->query($sql))
 				{

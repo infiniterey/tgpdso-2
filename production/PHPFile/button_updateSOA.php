@@ -89,7 +89,7 @@
   <input type="text" class="form-control" name="soa_agentname1" id="soa_agentname1">
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary"name="soaAgent1" id="soaAgent1" data-dismiss="modal" data-toggle="modal" data-target="#searchAgent" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
+      <button type="button" class="btn btn-primary"name="soaAgent1" id="soaAgent1" data-dismiss="modal" data-toggle="modal" data-target="#searchAgentUpdate" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
     </div>
   </div>
   <br>

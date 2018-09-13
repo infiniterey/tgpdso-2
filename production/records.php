@@ -4,6 +4,7 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <head>
+			<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	<style>
 		table tr:not(:first-child){
 			cursor:pointer;transition: all .25s	ease-in-out;
@@ -715,9 +716,30 @@
 																									}
 																									else
 																									{
+																										if($row['payment_MOP'] == "Monthly")
+																										{
 																											?>
 																											<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month']." month(s)"; ?></td>
 																											<?php
+																										}
+																										else if($row['payment_MOP'] == "Quarterly")
+																										{
+																											?>
+																											<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month'] / "3"." quarterly(s)"; ?></td>
+																											<?php
+																										}
+																										else if($row['payment_MOP'] == "Semi-Annual")
+																										{
+																											?>
+																											<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month'] / "6"." SA(s)"; ?></td>
+																											<?php
+																										}
+																										else if($row['payment_MOP'] == "Annual")
+																										{
+																											?>
+																											<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s)"; ?></td>
+																											<?php
+																										}
 																									}
 																									?>
 																									<td style="width: 10px;"><?php echo $row['payment_MOP']; ?></td>
@@ -734,7 +756,7 @@
 																												?>
 																												<div align="center">
 																													<button type="button" title="Edit Data" data-toggle="modal" data-target="#paymentModalEdit" class="btn btn-primary" style="font-size: 16px;"><i class="fa fa-pencil"></i></button>
-																													<a title="Delete Data" onclick="return confirm('Are you sure to delete?')" href="records.php?deletePayment=<?php echo $row['payment_policyNo'] ?>" class="btn btn-danger"style="font-size: 16px;"><i class="fa fa-trash"></i></a>
+																													<a title="Delete Data" onclick="return confirm('Are you sure to delete?')" href="records.php?deletePayment=<?php echo $row['payment_policyNo'] ?>&list=<?php echo $row['payment_ID']?>" class="btn btn-danger"style="font-size: 16px;"><i class="fa fa-trash"></i></a>
 																												</div>
 																												<?php
 																											}
@@ -817,7 +839,7 @@
 		<script	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<script	src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+
 
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="addplanmodal" data-keyboard="false" data-backdrop="static">
 	<?php include 'PHPFile/button_add_plan_records.php';?>
