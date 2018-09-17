@@ -485,11 +485,13 @@
 																																<button data-dismiss="modal" data-toggle="modal" data-target="#searchFundModal" style="cursor:auto; width: 40px;" style="border:none" type="button" class="btn btn-primary" id="searchFund" name="searchFund"><i class="fa fa-search"></i></button>
 																															</div>
 																															Rate<br>
+																															<input type="text" id="addText" name="addText" hidden>
 																		                          <input type="text" id="setFundRate" style="width: 150px;" placeholder="" name="setFundRate" required="required" class="form-control" required>&nbsp;&nbsp;<i style="font-size: 25px;">%</i><br/>
 																															<br><br>
 																																<button type="submit" class="btn btn-primary" id="saveThisFund" name="saveThisFund"><i class="fa fa-check"></i>&nbsp;&nbsp;Save</button>
 																																<button type="submit" class="btn btn-primary" id="update" name="update"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Update</button>
 																																<a type="submit" id="reset" name="reset" value="Reset" class="btn btn-default" href="records.php">Cancel</a>
+
 																														</form>
 																												</div>
 																										<div class="col-sm-6">
@@ -517,7 +519,7 @@
 																															?>
 																															<tr>
 																																<td><?php print($row['fundName']); ?></td>
-																																<td><?php print($row['polFund_rate']); ?>%</td>
+																																<td><?php print($row['polFund_rate']); ?></td>
 																																<td>
 																																	<div class="row">
 																																		<center>
@@ -539,15 +541,25 @@
 																												</tbody>
 																										</table>
 																										<script>
+
+																										var rateSum = 0;
+																										var addTable = document.getElementById('datatable-fixed-header10');
+																										for(var counterSum = 1; counterSum < addTable.rows.length; counterSum++)
+																										{
+																											rateSum = rateSum + parseInt(addTable.rows.length[counterSum].cells[1].innerHTML);
+																										}
+
+																										addText.value = rateSum;
+
 																										var table = document.getElementById('datatable-fixed-header');
 																										for(var counter = 1; counter < table.rows.length; counter++)
 																										{
 																											table.rows[counter].onclick = function()
-																											{;
+																											{
 																											 document.getElementById("getFundID").value = this.cells[0].innerHTML;
 																											 document.getElementById("").value = this.cells[3].innerHTML;
-																												};
-																											}
+																											};
+																										}
 																										</script>
 
 																									</div>
@@ -590,8 +602,10 @@
 
 																											$DB_con = Database::connect();
 																											$DB_con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-																											$sql = "SELECT * FROM fund";
-
+																											if(isset($_GET['edit']))
+																											{
+																											$edit = $_GET['edit'];
+																											$sql = "SELECT * FROM fund WHERE NOT EXISTS (SELECT * FROM policyFund WHERE polFund_fund = fundID AND polFund_policyNo = '$edit')";
 																											$result = $DB_con->query($sql);
 																											if($result->rowCount()>0){
 																												while($row=$result->fetch(PDO::FETCH_ASSOC)){
@@ -613,6 +627,7 @@
 																												}
 																											}
 																											else{}
+																											}
 																										?>
 
 																										</tbody>
@@ -724,15 +739,33 @@
 																										}
 																										else if($row['payment_MOP'] == "Quarterly")
 																										{
+																											if($row['payment_remarks_month'] == "1")
+																											{
+																												?>
+																													<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and 1 quarterly"; ?></td>
+																												<?php
+																											}
+																											else
+																											{
 																											?>
-																											<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month'] / "3"." quarterly(s)"; ?></td>
+																												<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month'] / "3"." quarterly"; ?></td>
 																											<?php
+																											}
 																										}
 																										else if($row['payment_MOP'] == "Semi-Annual")
 																										{
+																											if($row['payment_remarks_month'] == "1")
+																											{
+																												?>
+																													<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and 1 SA"; ?></td>
+																												<?php
+																											}
+																											else
+																											{
 																											?>
-																											<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month'] / "6"." SA(s)"; ?></td>
+																												<td style="width: 10px;"><?php echo $row['payment_remarks_year']." year(s) and ".$row['payment_remarks_month'] / "6"." SA"; ?></td>
 																											<?php
+																											}
 																										}
 																										else if($row['payment_MOP'] == "Annual")
 																										{

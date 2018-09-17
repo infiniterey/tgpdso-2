@@ -71,7 +71,7 @@
     <br>
         <label class="control-label">
         Premium:
-      </label><input type="text" class="form-control" name="soa_premium" id="soa_premium"><br>
+      </label><input type="text" class="form-control" name="soa_premium" id="soa_premium" onchange="commissionAddSOA()"><br>
         <label class="control-label">
         Rate:
       </label><input type="text" class="form-control" name="soa_rate" id="soa_rate"><br>
@@ -109,3 +109,17 @@
     </form>
   </div>
 </div>
+<script>
+function commissionAddSOA()
+{
+	var premium = document.getElementById("soa_premium").value;
+	var rate = document.getElementById("soa_rate").value;
+	var rate2 = premium / 100;
+	var str = rate.slice(0, -1) ;
+	str = str/100;
+	var result = premium*str;
+	soa_commission.value = premium*str;
+	// window.alert(fyc.value);
+	// document.getElementById("myText").value
+}
+</script>

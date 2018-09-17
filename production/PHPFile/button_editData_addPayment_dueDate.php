@@ -105,107 +105,108 @@ include 'PHPFile/Connection_Database.php';
               $nextDueDateResult = $nextDueDateResult.$row['payment_nextDue'];
             }
 
-              switch($paymentMOP)
-              {
-                  case "Monthly":
+            switch($paymentMOP)
+            {
+                case "Monthly":
 
-                  if($paymentMonthRemarks <= "12")
-                  {
-                    $calculateMonth = $paymentMonthRemarks + "1";
-                    $calculateYear = $paymentYearRemarks + "0";
-                  }
-                  else if($paymentMonthRemarks >= "13")
-                  {
-                    $calculateMonth = "1";
-                    $calculateYear = $paymentYearRemarks + "1";
-                  }
+                if($paymentMonthRemarks < "12")
+                {
+                  $calculateMonth = $paymentMonthRemarks + "1";
+                  $calculateYear = $paymentYearRemarks + "0";
+                }
+                else if($paymentMonthRemarks > "12")
+                {
+                  $calculateMonth = "1";
+                  $calculateYear = $paymentYearRemarks + "1";
+                }
 
+                ?>
+                <script>
+                    var month = 1;
+                </script>
+                <?php
+
+                break;
+                case "Quarterly":
+                if($paymentMonthRemarks == "3" || $paymentMonthRemarks == "6" || $paymentMonthRemarks == "9")
+                {
+                  $calculateMonth = $paymentMonthRemarks + "3";
+                  $calculateYear = $paymentYearRemarks + "0";
+                }
+                else if($paymentMonthRemarks >= "12")
+                {
+                  $calculateMonth = "1";
+                  $calculateYear = $paymentYearRemarks + "1";
+                }
+                else
+                {
                   ?>
-                  <script>
-                      var month = 1;
-                  </script>
+                  <script>alert('Quarterly does not accept within that month.');</script>
                   <?php
-
-                  break;
-                  case "Quarterly":
-                  if($paymentMonthRemarks == "3" || $paymentMonthRemarks == "6" || $paymentMonthRemarks == "9")
-                  {
-                    $calculateMonth = $paymentMonthRemarks + "3";
-                    $calculateYear = $paymentYearRemarks + "0";
-                  }
-                  else if($paymentMonthRemarks >= "12")
-                  {
-                    $calculateMonth = "1";
-                    $calculateYear = $paymentYearRemarks + "1";
-                  }
-                  else
-                  {
-                    ?>
-                    <script>alert('Quarterly does not accept within that month.');</script>
-                    <?php
-                    return;
-                  }
+                  return;
+                }
 
 
 
+                ?>
+                <script>
+                    var month = 3;
+                </script>
+                <?php
+
+                break;
+                case "Semi-Annual":
+                if($paymentMonthRemarks == "6")
+                {
+                  $calculateMonth = $paymentMonthRemarks + "6";
+                  $calculateYear = $paymentYearRemarks;
+                }
+                else if($paymentMonthRemarks >= "12")
+                {
+                  $calculateMonth = "1";
+                  $calculateYear = $paymentYearRemarks + "1";
+                }
+                else
+                {
                   ?>
-                  <script>
-                      var month = 3;
-                  </script>
+                  <script>alert('Semi-Annual does not accept within that month.');</script>
                   <?php
-
-                  break;
-                  case "Semi-Annual":
-                  if($paymentMonthRemarks == "6")
-                  {
-                    $calculateMonth = $paymentMonthRemarks + "6";
-                    $calculateYear = $paymentYearRemarks;
-                  }
-                  else if($paymentMonthRemarks >= "12")
-                  {
-                    $calculateMonth = "1";
-                    $calculateYear = $paymentYearRemarks + "1";
-                  }
-                  else
-                  {
-                    ?>
-                    <script>alert('Semi-Annual does not accept within that month.');</script>
-                    <?php
-                    return;
-                  }
+                  return;
+                }
 
 
+                ?>
+                <script>
+                    var month = 6;
+                </script>
+                <?php
+
+                break;
+                case "Annual":
+
+                if($paymentMonthRemarks == "1")
+                {
+                  $calculateMonth = "1";
+                  $calculateYear = $paymentYearRemarks + "1";
+                }
+                else
+                {
                   ?>
-                  <script>
-                      var month = 6;
-                  </script>
+                  <script>alert('Annual does not accept within that month.');</script>
                   <?php
+                  return;
+                }
 
-                  break;
-                  case "Annual":
+                ?>
+                <script>
+                    var month = 12;
+                </script>
+                <?php
 
-                  if($paymentMonthRemarks == "1")
-                  {
-                    $calculateMonth = "1";
-                    $calculateYear = $paymentYearRemarks + "1";
-                  }
-                  else
-                  {
-                    ?>
-                    <script>alert('Annual does not accept within that month.');</script>
-                    <?php
-                    return;
-                  }
-
-                  ?>
-                  <script>
-                      var month = 12;
-                  </script>
-                  <?php
-
-                  break;
-                  default:
-              }
+                break;
+                default:
+                $paymentMOP = $paymentMOP;
+            }
               ?>
               <script>
 

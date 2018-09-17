@@ -17,7 +17,6 @@ else
 					while($row=mysqli_fetch_Array($result))
 					{
 						?>
-
 						<script> document.getElementById('setFundID').value = '<?php echo $row['fundID'];?>';</script>
 						<script> document.getElementById('setFundName').value = '<?php echo $row['fundName'];?>';</script>
 						<script> document.getElementById('setFundRate').value = '<?php echo $row['polFund_rate'];?>';</script>
@@ -33,6 +32,17 @@ else
 			$fundID = $_REQUEST['setFundID'];
 			$rate = $_REQUEST['setFundRate'];
 
+			if($rate > "100")
+			{
+				?>
+				<script>
+					alert('Does not accept the rate that less than the value given');
+					window.location="records.php?edit=<?php echo $add ?>&#fundModal";
+				</script>
+				<?php
+				return;
+			}
+
 			$sql = "INSERT INTO policyFund (polFund_policyNo, polFund_fund, polFund_rate)
 			values ('$add','$fundID','$rate')";
 			echo "<meta http-equiv='refresh' content='0'>";
@@ -46,7 +56,8 @@ else
 					</script>
 						<?php
 				}
-				else {
+				else
+				{
 					echo "Error:". $sql."<br>".$conn->error;
 				}
 				$conn->close();

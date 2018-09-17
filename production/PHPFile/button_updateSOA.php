@@ -72,7 +72,7 @@
     <br>
         <label class="control-label">
         Premium:
-      </label><input type="text" class="form-control" name="soa_premium1" id="soa_premium1"><br>
+      </label><input type="text" class="form-control" name="soa_premium1" id="soa_premium1" onchange="commissionUpdateSOA()"><br>
         <label class="control-label">
         Rate:
       </label><input type="text" class="form-control" name="soa_rate1" id="soa_rate1"><br>
@@ -220,3 +220,21 @@ include 'PHPFile/Connection_Database.php';
        }
      }
  ?>
+
+ <script>
+    function commissionUpdateSOA()
+    {
+      var premium = document.getElementById("soa_premium1").value;
+    //  var number = document.getElementById("soa_rate1").value;
+      var rate = document.getElementById("soa_rate1").value;
+
+
+      var rate2 = premium / 100;
+      var str = rate.slice(0, -1);
+      str = str/100;
+      var result = premium*str;
+      document.getElementById("soa_commission1").value = premium*str;
+      // window.alert(fyc.value);
+      // document.getElementById("myText").value
+    }
+  </script>

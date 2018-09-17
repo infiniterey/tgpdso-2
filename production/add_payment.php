@@ -49,7 +49,7 @@
       <input type="date" class="form-control aswidth" name="paymentDueDate" id="paymentDueDate">
       <input type="date" name="paymentNextDue" id="paymentNextDue" hidden>
       <input type="date" name="paymentNextDueADD" id="paymentNextDueADD" hidden>
-      <input type="text" name="dateText" id="dateText" hidden>
+      <input type="date" name="dateText" id="dateText" hidden>
       <br>
        <br>
      </div>
@@ -112,16 +112,18 @@ include 'PHPFile/Connection_Database.php';
               $nextDueDateResult = $nextDueDateResult.$row['payment_nextDue'];
             }
 
+
+
               switch($paymentMOP)
               {
                   case "Monthly":
 
-                  if($paymentMonthRemarks <= "12")
+                  if($paymentMonthRemarks < "12")
                   {
                     $calculateMonth = $paymentMonthRemarks + "1";
                     $calculateYear = $paymentYearRemarks + "0";
                   }
-                  else if($paymentMonthRemarks >= "13")
+                  else if($paymentMonthRemarks > "12")
                   {
                     $calculateMonth = "1";
                     $calculateYear = $paymentYearRemarks + "1";
@@ -212,6 +214,7 @@ include 'PHPFile/Connection_Database.php';
 
                   break;
                   default:
+                  $paymentMOP = $paymentMOP;
               }
               ?>
               <script>
@@ -241,24 +244,22 @@ include 'PHPFile/Connection_Database.php';
               };
 
               </script>
-              <script type="text/javascript" src="jquery.js">
+              <script type="text/javascript">
 
                 var resultDate = "<?php echo $nextDueDateResult; ?>";
                 var dateObjective = new Date(resultDate);
-                alert(resultDate);
                 var dateTimeObject = dateObjective.addMonths(month);
                 var newdateResult= dateTimeObject.getFullYear() + '-' + (((dateTimeObject.getMonth() + 1) < 10) ? '0' : '') + (dateTimeObject.getMonth() + 1) + '-' + ((dateTimeObject.getDate() < 10) ? '0' : '') + dateTimeObject.getDate();
 
-                // document.getElementById('dateText').value = newdateResult;
-
-
+                document.getElementById("dateText").value = newdateResult;
+                alert(document.getElementById("dateText").value);
                 function post()
                 {
                   var dataDate = newdateResult;
                   $.post('records.php', {webdate:dataDate},
                   function(data)
                   {
-                    $('#paymentNextDue').html(data);
+                    $('#dateText').html(data);
                   });
                 }
 

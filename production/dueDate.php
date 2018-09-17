@@ -108,7 +108,15 @@
                                   <?php
                                     $DB_con = Database::connect();
                                     $DB_con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-                                    $sql = "SELECT * FROM production, client, payment, plans WHERE planID = plan AND policyno = payment_policyNo and clientID = prodclientID AND dueDate = payment_nextDue";
+																		$teamItSelf = $_SESSION["team"];
+																		if($_SESSION["usertype"] == "Secretary" || $_SESSION["usertype"] == "secretary")
+																		{
+                                    	$sql = "SELECT * FROM production, client, payment, plans, agents, team WHERE teamID = agentTeam AND agentCode = agent AND teamName = '$teamItSelf' AND planID = plan AND policyno = payment_policyNo and clientID = prodclientID AND dueDate = payment_nextDue";
+																		}
+																		else
+																		{
+																			$sql = "SELECT * FROM production, client, payment, plans WHERE planID = plan AND policyno = payment_policyNo and clientID = prodclientID AND dueDate = payment_nextDue";
+																		}
 
                                     $result = $DB_con->query($sql);
                                     if($result->rowCount()>0){

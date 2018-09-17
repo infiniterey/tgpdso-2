@@ -456,39 +456,6 @@
 											</script>
 
 
-<!--											<?php
-											$servername = "localhost";
-											$username = "root";
-											$password = "";
-											$dbname = "tgpdso_db";
-
-											$conn = new mysqli ($servername, $username, $password, $dbname);
-
-											if(mysqli_connect_error())
-											{
-												die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
-											}
-											else
-											{
-													if(isset($_GET['client']))
-													{
-															$client = $_GET['client'];
-
-																$result=mysqli_query($conn,"SELECT * FROM client WHERE clientID = '$client'");
-
-																while($row=mysqli_fetch_Array($result))
-																{
-																	?>
-																	<script> document.getElementById('client').value = '<?php echo $row['cLastname'].",".$row['cFirstname']." ".$row['cMiddlename'];?>';</script>
-																<?php
-															};
-												}
-											}
-
-											?>
--->
-
-
 
 
 	<!--		//							$(document).on("click", "retrieve", function()

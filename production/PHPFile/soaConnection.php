@@ -52,14 +52,11 @@ function viewCheckbox() {
 
 }
 
+
+
 </script>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tgpdso_db";
-
-$conn = new mysqli ($servername, $username, $password, $dbname);
+include 'PHPFile/Connection_Database.php';
 
 if(mysqli_connect_error())
 {
@@ -101,12 +98,7 @@ else
 }
 ?>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "tgpdso_db";
-
-$conn = new mysqli ($servername, $username, $password, $dbname);
+include 'PHPFile/Connection_Database.php';
 
 if(mysqli_connect_error())
 {
@@ -147,12 +139,7 @@ else
 ?>
 
 <?php
-  $host = "localhost";
-  $dbusername = "root";
-  $dbpassword = "";
-  $dbname = "tgpdso_db";
-
-      $conn = new mysqli ($host, $dbusername, $dbpassword, $dbname);
+include 'PHPFile/Connection_Database.php';
 
       if(mysqli_connect_error())
       {
@@ -197,12 +184,7 @@ else
 ?>
 
 <?php
-  $host = "localhost";
-  $dbusername = "root";
-  $dbpassword = "";
-  $dbname = "tgpdso_db";
-
-      $conn = new mysqli ($host, $dbusername, $dbpassword, $dbname);
+include 'PHPFile/Connection_Database.php';
 
       if(mysqli_connect_error())
       {
@@ -237,12 +219,7 @@ else
 
 
 <?php
-  $host = "localhost";
-  $dbusername = "root";
-  $dbpassword = "";
-  $dbname = "tgpdso_db";
-
-      $conn = new mysqli ($host, $dbusername, $dbpassword, $dbname);
+include 'PHPFile/Connection_Database.php';
 
       if(mysqli_connect_error())
       {

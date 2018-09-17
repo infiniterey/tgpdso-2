@@ -110,8 +110,16 @@ overflow-y:auto;
 
 																	$DB_con = Database::connect();
 																	$DB_con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-																	$sql = "SELECT * FROM production, payment, agents, client WHERE payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
-
+																	$teamItSelf = $_SESSION["team"];
+																	$userTypeItSelf = $_SESSION["usertype"];
+																	if($_SESSION["usertype"] == "Secretary" || $_SESSION["usertype"] == "secretary")
+																	{
+																		$sql = "SELECT * FROM production, payment, agents, client, team WHERE agentCode = agent AND agentTeam = teamID AND teamName = '$teamItSelf' AND payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
+																	}
+																	else
+																	{
+																		$sql = "SELECT * FROM production, payment, agents, client WHERE payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
+																	}
 																	$result = $DB_con->query($sql);
 																	if($result->rowCount()>0){
 																		while($row=$result->fetch(PDO::FETCH_ASSOC)){
