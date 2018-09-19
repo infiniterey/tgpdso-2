@@ -463,12 +463,32 @@
 
 			 																			<div>
 																						</div>
-
+																						<?php
+																						include 'PHPFile/Connection_Database.php';
+																						if(mysqli_connect_error())
+																						{
+																							die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
+																						}
+																						else
+																						{
+																							if(isset($_GET['edit']))
+																							{
+																								$edit = $_GET['edit'];
+																								$sum = 0;
+																								$sql=mysqli_query($conn,"SELECT * FROM policyfund WHERE polFund_policyNo = '$edit'");
+																								while($row=mysqli_fetch_Array($sql))
+																								{
+																									$score = $row['polFund_rate'];
+																									$sum += (int)$score;
+																								}
+																							}
+																						}
+																						?>
 																						<div id="fundModal" name="fundModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-																							<div class="modal-dialog modal-sm" style="width: 950px;" role="document">
+																							<div class="modal-dialog modal-lg"  role="document">
 																								<div class="modal-content">
 																									<div class="modal-header">
-																										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+																										<button type="button" onclick="checkMaximumFund()" id="closeFund" name="closeFund" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 																										<h4 class="modal-title" id="myFundModal">Add Fund</h4>
 																									</div>
 																									<form method='post' name='myFormModal' onsubmit="CheckForm()">
@@ -476,26 +496,41 @@
 
 																									<div id="datatable-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 																                    <div class="row">
-																											<div class="col-lg-5">
+																											<div class="col-sm-4">
 																													<form method="POST" action="<?php $_PHP_SELF ?>">
 																		                          Fund:
 																															<div>
 																																<input name="setFundID" id="setFundID" hidden>
-																		                          	<input readonly="readonly" name="setFundName" id="setFundName" style="width: 150px;" class="form-control" type="text" required>
-																																<button data-dismiss="modal" data-toggle="modal" data-target="#searchFundModal" style="cursor:auto; width: 40px;" style="border:none" type="button" class="btn btn-primary" id="searchFund" name="searchFund"><i class="fa fa-search"></i></button>
+																		                          	<input readonly="readonly" name="setFundName" id="setFundName" style="width: 150px; margin-top: -5px;" class="form-control" type="text" required>
+																																<button data-toggle="modal" data-target="#searchFundModal" style="cursor:auto; width: 40px;" style="border:none" type="button" class="btn btn-primary" id="searchFund" name="searchFund"><i class="fa fa-search"></i></button>
 																															</div>
 																															Rate<br>
-																															<input type="text" id="addText" name="addText" hidden>
+																															<input type="text" id="addText" name="addText" hidden value="<?php echo $sum?>">
 																		                          <input type="text" id="setFundRate" style="width: 150px;" placeholder="" name="setFundRate" required="required" class="form-control" required>&nbsp;&nbsp;<i style="font-size: 25px;">%</i><br/>
 																															<br><br>
-																																<button type="submit" class="btn btn-primary" id="saveThisFund" name="saveThisFund"><i class="fa fa-check"></i>&nbsp;&nbsp;Save</button>
+																																<button type="submit" style="size: 100px;" class="btn btn-primary" id="saveThisFund" name="saveThisFund"><i class="fa fa-check"></i>&nbsp;&nbsp;Save</button>
 																																<button type="submit" class="btn btn-primary" id="update" name="update"><i class="fa fa-file-text"></i>&nbsp;&nbsp;Update</button>
-																																<a type="submit" id="reset" name="reset" value="Reset" class="btn btn-default" href="records.php">Cancel</a>
+
 
 																														</form>
+																														<script type="text/javascript">
+																														function checkMaximumFund()
+																														{
+																															if(document.getElementById("addText").value=="100")
+																															{
+																																document.getElementById('closeFund').disabled = false;
+																															}
+																															else
+																															{
+																																alert('Maximum 100% only');
+																																document.getElementById('closeFund').disabled = true;
+																																return;
+																															}
+																														}
+																														</script>
 																												</div>
-																										<div class="col-sm-6">
-																											<table method ="post" id="datatable-fixed-header10" name="datatable-fixed-header10" class="table table-bordered dataTable table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
+																										<div class="col-sm-7">
+																											<table method ="post" id="datatable-fixed-header10"  name="datatable-fixed-header10" class="table table-bordered dataTable table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
 																											<thead>
 																												<tr role="row">
 																														<th class="sorting_asc" tabindex="0" aria-controls="datatable-fixed-header10"aria-sort="ascending" aria-label="Trans. Date: activate to sort column descending">
@@ -519,7 +554,7 @@
 																															?>
 																															<tr>
 																																<td><?php print($row['fundName']); ?></td>
-																																<td><?php print($row['polFund_rate']); ?></td>
+																																<td><?php print($row['polFund_rate']); ?>%</td>
 																																<td>
 																																	<div class="row">
 																																		<center>
@@ -576,10 +611,10 @@
 																				</div>
 
 																				<div id="searchFundModal" name="searchFundModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-																					<div class="modal-dialog modal-sm" style="width: 500px" role="document">
+																					<div class="modal-dialog modal-sm" style="width: 500px; margin-top: 100px;" role="document">
 																						<div class="modal-content">
 																							<div class="modal-header">
-																								<button type="button" class="close" data-dismiss="modal" data-target="#fundModal" data-toggle="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+																								<button type="button" class="close" data-dismiss="modal" data-toggle="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 																								<h4 class="modal-title" id="myFundModal">Search Fund</h4>
 																							</div>
 																							<form method='post' name='myFormModal' onsubmit="CheckForm()">
@@ -616,7 +651,7 @@
 																															<div class="row">
 																																<center>
 																																	<form method='post' name='myform' onsubmit="CheckForm()">
-																																		<button data-dismiss="modal" data-target="#fundModal" data-toggle="modal" type="button" id="fundEdit" name="fundEdit" class="btn btn-primary"><i class="fa fa-pencil" ></i></button>
+																																		<button data-dismiss="modal" data-toggle="modal" type="button" id="fundEdit" name="fundEdit" class="btn btn-primary"><i class="fa fa-pencil" ></i></button>
 																																	</form>
 																																</center>
 																															</div>
@@ -682,7 +717,7 @@
 																			 <table name="datatable-fixed-header1" id="datatable-fixed-header1" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
 																					<thead>
 																					<tr role="row">
-																							<th class="sorting_asc" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Trans. Date: activate to sort column descending" style="width: 30px;text-align:center;">Trans. Date</th>
+																							<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-label="Trans. Date: activate to sort column descending" style="width: 30px;text-align:center;">Trans. Date</th>
 																							<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-label="Remarks: activate to sort column ascending" style="width: 30px;text-align:center;">Remarks</th>
 																							<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-label="MOP: activate to sort column ascending" style="width: 10px;text-align:center;">M.O.P</th>
 																							<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-label="Due Date: activate to sort column ascending" style="width: 30px;text-align:center;">Due Date</th>
@@ -711,8 +746,11 @@
 																						if(isset($_GET['edit']))
 																						{
 																						$edit = $_GET['edit'];
-																						$sql = "SELECT * FROM payment, production WHERE payment_policyNo = policyNo AND payment_policyNo = '$edit'";
+																						$sql = "SELECT * FROM payment, production WHERE payment_policyNo = policyNo AND payment_policyNo = '$edit' ORDER BY YEAR(payment_nextDue) DESC, MONTH(payment_nextDue) DESC, DAY(payment_nextDue) DESC";
 
+
+																						$currentDate = '';
+																						$previousDate = '';
 
 																					$result = $DB_con->query($sql);
 																					if($result->rowCount()>0)
@@ -784,23 +822,34 @@
 																									<td><?php echo $row['payment_soaDate']; ?></td>
 																									<td>
 																										<?php
-																											if($row['payment_soaDate'] == '')
-																											{
-																												?>
-																												<div align="center">
-																													<button type="button" title="Edit Data" data-toggle="modal" data-target="#paymentModalEdit" class="btn btn-primary" style="font-size: 16px;"><i class="fa fa-pencil"></i></button>
-																													<a title="Delete Data" onclick="return confirm('Are you sure to delete?')" href="records.php?deletePayment=<?php echo $row['payment_policyNo'] ?>&list=<?php echo $row['payment_ID']?>" class="btn btn-danger"style="font-size: 16px;"><i class="fa fa-trash"></i></a>
-																												</div>
-																												<?php
-																											}
-																											else
-																											{
-																													?>
-																													<div align="center">
-																														<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="font-size: 22px;"></i></a>
-																													</div>
-																													<?php
-																											}
+
+																										if($currentDate == $previousDate)
+																										{
+																											$currentDate = $row['payment_nextDue'];
+																											?>
+																											<div align="center">
+																												<button type="button" title="Edit Data" data-toggle="modal" data-target="#paymentModalEdit" class="btn btn-primary" style="font-size: 16px;"><i class="fa fa-pencil"></i></button>
+																												<a title="Delete Data" onclick="return confirm('Are you sure to delete?')" href="records.php?deletePayment=<?php echo $row['payment_policyNo'] ?>&list=<?php echo $row['payment_ID']?>" class="btn btn-danger"style="font-size: 16px;"><i class="fa fa-trash"></i></a>
+																											</div>
+																											<?php
+																										}
+																										else
+																										{
+																											?>
+																											<div align="center">
+																												<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a>
+																											</div>
+																											<?php
+																										}
+																										$previousDate = $currentDate;
+																										if(!empty($row['payment_soaDate']))
+																										{
+																											?>
+																											<div align="center">
+																												<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a>
+																											</div>
+																											<?php
+																										}
 																										?>
 																									</td>
 																									<td hidden><?php echo $row['payment_policyNo']; ?></td>

@@ -56,7 +56,7 @@
  </div>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" style="width: 100px;" name="paymentSaveButton" id="paymentSaveButton" onlick="post();"><i class="fa fa-check"></i>&nbsp;&nbsp;Save</button>
+        <button type="submit" class="btn btn-primary" style="width: 100px;" name="paymentSaveButton" id="paymentSaveButton"><i class="fa fa-check"></i>&nbsp;&nbsp;Save</button>
         <!--<button type="button" class="btn btn-default" style="width: 100px;" data-dismiss="modal">Close</button>-->
       </div>
     </form>
@@ -101,6 +101,7 @@ include 'PHPFile/Connection_Database.php';
             $paymentYearRemarks = "0";
             $paymentMonthRemarks = "0";
             $nextDueDateResult = "";
+
 
             $paymentMOP = $_POST['paymentmodeOfPayment'];
 
@@ -252,38 +253,22 @@ include 'PHPFile/Connection_Database.php';
                 var newdateResult= dateTimeObject.getFullYear() + '-' + (((dateTimeObject.getMonth() + 1) < 10) ? '0' : '') + (dateTimeObject.getMonth() + 1) + '-' + ((dateTimeObject.getDate() < 10) ? '0' : '') + dateTimeObject.getDate();
 
                 document.getElementById("dateText").value = newdateResult;
-                alert(document.getElementById("dateText").value);
-                function post()
-                {
-                  var dataDate = newdateResult;
-                  $.post('records.php', {webdate:dataDate},
-                  function(data)
-                  {
-                    $('#dateText').html(data);
-                  });
-                }
+                var valueData = document.getElementById("dateText").value;
+                alert(valueData);
+                //window.location="records.php?getDateThis="+valueData+"";
+                // function post()
+                // {
+                //   var dataDate = newdateResult;
+                //   $.post('records.php', {webdate:dataDate},
+                //   function(data)
+                //   {
+                //     $('#dateText').html(data);
+                //   });
+                // }
 
               </script>
               <?php
-              $nextDueResulter = $_POST['paymentNextDue'];
-
-
-              // if($paymentMonthRemarks == "12")
-              // {
-              //   $calculateMonth = $paymentMonthRemarks - "12";
-              //   $calculateYear = $paymentYearRemarks + "1";
-              // }
-
-              // if($paymentMonthRemarks == "3" || $paymentMonthRemarks == "6")
-              // {
-              //   $calculateMonth = $paymentMonthRemarks + "3";
-              //   $calculateYear = $paymentYearRemarks;
-              // }
-              // else if($paymentMonthRemarks == "12")
-              // {
-              //   $calculateMonth = $paymentMonthRemarks - "12";
-              //   $calculateYear = $paymentYearRemarks + "1";
-              // }
+                $nextDueResulter = $_POST['paymentNextDue'];
 
             $sql = "INSERT INTO payment (payment_policyNo,
               payment_Amount, payment_issueDate,

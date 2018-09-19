@@ -31,12 +31,25 @@ else
 			$add = $_REQUEST['edit'];
 			$fundID = $_REQUEST['setFundID'];
 			$rate = $_REQUEST['setFundRate'];
+			$number = $_REQUEST['addText'];
+
+			$totalRate = $rate + $number;
 
 			if($rate > "100")
 			{
 				?>
 				<script>
 					alert('Does not accept the rate that less than the value given');
+					window.location="records.php?edit=<?php echo $add ?>&#fundModal";
+				</script>
+				<?php
+				return;
+			}
+			if($totalRate > "100")
+			{
+				?>
+				<script>
+					alert('Greater than maximum rate cannot be not accept');
 					window.location="records.php?edit=<?php echo $add ?>&#fundModal";
 				</script>
 				<?php
