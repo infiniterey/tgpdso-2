@@ -137,29 +137,29 @@
 																				 Last Name
 																				 <input id="clientToRetrieve" name="clientToRetrieve" hidden>
 																				 <input type="text" name="policyNoOwner" id="policyNoOwner"hidden>
-																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="lastname1" id="lastname1"><br>
+																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="lastname1" id="lastname1" placeholder="Last Name"><br>
 																			 </div>
 																		 	 <div class="col-xs-3">
 																				 First Name
-																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12"  name="firstname1" id="firstname1">
+																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12"  name="firstname1" id="firstname1" placeholder="First Name">
 																			 </div>
 																			 <div class="col-xs-3">
 																				 Middle Name
-																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="middlename1" id="middlename1">
+																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="middlename1" id="middlename1" placeholder="Middle Name">
 																			 </div>
 																			 <div class="col-xs-3">
 																				 Birthday
-																				 <input style="cursor:auto" style="border:none" type="date" class="form-control col-md-7 col-xs-4"  name="birthdate1" id="birthdate1">
+																				 <input style="cursor:auto" style="border:none" type="date" class="form-control col-md-7 col-xs-4"  name="birthdate1" id="birthdate1" placeholder="Birthday">
 																			 </div>
 																		 </div>
 																		 <div class="row">
 																			 <div class="col-xs-3">
 																				 Address
-																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="address1" id="address1">
+																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="address1" id="address1" placeholder="Address">
 																			 </div>
 																			 <div class="col-xs-3">
 																				 Contact #
-																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4" name="contactno1" id="contactno1">
+																				 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4" name="contactno1" id="contactno1" placeholder="Contact #">
 																			 </div>
 																			</div>
 																		</div><br/>
@@ -170,52 +170,64 @@
 																			 <div class="row">
 																	 			 <div class="col-xs-3">
 																					 Last Name
-																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12"  name="insuredLastName" id="insuredLastName"><br>
+																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12"  name="insuredLastName" id="insuredLastName" placeholder="Last Name"><br>
 																				 </div>
 																			 	 <div class="col-xs-3">
 																					 First Name
-																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12"  name="insuredFirstName" id="insuredFirstName">
+																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12"  name="insuredFirstName" id="insuredFirstName" placeholder="First Name">
 																				 </div>
 																				 <div class="col-xs-3">
 																					 Middle Name
-																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="insuredMiddleName" id="insuredMiddleName">
+																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="insuredMiddleName" id="insuredMiddleName" placeholder="Middle Name">
 																				 </div>
 																				 <div class="col-xs-3">
 																					 Birthday
-																					 <input style="cursor:auto" style="border:none" type="date" class="form-control col-md-7 col-xs-4"  name="insuredBirthdate" id="insuredBirthdate">
+																					 <input style="cursor:auto" style="border:none" type="date" class="form-control col-md-7 col-xs-4"  name="insuredBirthdate" id="insuredBirthdate" placeholder="Birthday">
 																				 </div>
 																			 </div>
 																			 <div class="row">
 																				 <div class="col-xs-3">
 																					 Address
-																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="insuredAddress" id="insuredAddress">
+																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="insuredAddress" id="insuredAddress" placeholder="Address">
 																				 </div>
 																				 <div class="col-xs-3">
 																					 Contact #
-																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="insuredContactno" id="insuredContactno">
+																					 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="insuredContactno" id="insuredContactno" placeholder="Contact #">
 																				 </div>
 																			 </div>
 																		 </div>
 																		 </div><br/>
 																		 <div class="form-group">
 																			 <h5><b>Policy Details</b></h5><hr>
+																			 	<script>
+																				jQuery(function($) {
+    																		$('input.number').on('keyup', function() {
+																					if(event.which >= 37 && event.which <= 40) return;
+																					$(this).val(function(index, value) {
+																						return value
+																						.replace(/\D/g, "")
+																						.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+																							});
+    																				});
+																					});
+																				</script>
 																			 <div class="row">
 																		 			 <div class="col-xs-3">
 																						 Plan
 																						 <div class="row">
 																						 	<div class="col-md-10">
-																						 		<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="planName" id="planName"><br>
+																						 		<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="planName" id="planName" placeholder="Plan" readonly><br>
 																						 		<input style="cursor:auto" style="border:none" type="text" name="policyPlan" id="policyPlan" hidden>
 																								<input name="planRate" id="planRate" hidden>
 																					 		</div>
 																							<div class="col-md-2" style="margin-left: -16px;">
-																								<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addplanmodal" name="planButton" id="planButton"><i class="fa fa-search"></i></button>
+																								<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#addplanmodal" name="planButton" id="planButton" disabled><i class="fa fa-search"></i></button>
 																					 		</div>
 																					 </div>
 																					 </div>
 																				 	 <div class="col-md-3">
 																						 Face Amount
-																						 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="policyFaceAmount" id="policyFaceAmount">
+																						 <input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12 number" name="policyFaceAmount" id="policyFaceAmount" placeholder="Face Amount">
 																					 </div>
 																					 <div class="col-sm-3 ">
 																						 Mode of Payment
@@ -234,9 +246,10 @@
 																					 </div>
 																	 	 		</div>
 																				<div class="row">
+
 																					<div class="col-xs-3">
 																						Premium
-																						<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="policyPremium" id="policyPremium"><br>
+																						<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12 number" name="policyPremium" id="policyPremium" placeholder="Premium" ng-currency><br>
 																					</div>
 																					<div class="col-xs-3">
 																						Fund
@@ -273,12 +286,12 @@
 																					}
 																					?>
 																							<div class="col-md-10">
-																								<input data-target="#fundModal" data-toggle="modal" value="<?php echo $name; ?>" readonly="readonly" style="cursor:auto; width: 180px;" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="policyFund" id="policyFund">
+																								<input placeholder="Fund" value="<?php echo $name; ?>" readonly="readonly" style="border:none; width: 180px;" type="text" class="form-control col-md-7 col-xs-12" name="policyFund" id="policyFund">
 																							</div>
 																							<div class="col-md-2" style="margin-left: -19px;">
 																								<input id="policyRate" name="policyRate" hidden>
 																								<input id="getFundID" name="getFundID" hidden>
-																								<button disabled="disabled" style="cursor:auto; width: 40px;" style="border:none" type="button" data-toggle="modal" data-target="#fundModal" class="form-control btn btn-primary" name="fundButton" id="fundButton"><i class="fa fa-plus" hidden></i></button>
+																								<button style="width: 40px;" type="button" data-toggle="modal" data-target="#fundModal" class="btn btn-primary" name="fundButton" id="fundButton" disabled><i class="fa fa-plus"></i></button>
 																					</div>
 																					</div>
 																					</div>
@@ -325,33 +338,33 @@
 																						<div class="col-xs-3">
 																							<input type="text" name="beneID" id="beneID" hidden>
 																							Last Name
-																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="beneLastName" id="beneLastName"><br>
+																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12" name="beneLastName" id="beneLastName" placeholder="Last Name"><br>
 																						</div>
 																						<div class="col-xs-3">
 																							First Name
-																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12"  name="beneFirstName" id="beneFirstName" >
+																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12"  name="beneFirstName" id="beneFirstName" placeholder="First Name">
 																						</div>
 																						<div class="col-xs-3">
 																							Middle Name
-																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="beneMiddleName" id="beneMiddleName">
+																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="beneMiddleName" id="beneMiddleName" placeholder="Middle Name">
 																						</div>
 																						<div class="col-xs-3">
 																							Birthday
-																							<input style="cursor:auto" style="border:none" type="date" class="form-control col-md-7 col-xs-4"  name="beneBirthday" id="beneBirthday" >
+																							<input style="cursor:auto" style="border:none" type="date" class="form-control col-md-7 col-xs-4"  name="beneBirthday" id="beneBirthday" placeholder="Birthday">
 																						</div>
 																					</div>
 																					<div class="row">
 																						<div class="col-xs-3">
 																							Address
-																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="beneAddress" id="beneAddress" >
+																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4"  name="beneAddress" id="beneAddress" placeholder="Address">
 																						</div>
 																						<div class="col-xs-3">
 																							Contact #
-																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4" name="beneContact" id="beneContact">
+																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4" name="beneContact" id="beneContact" placeholder="Contact #">
 																						</div>
 																						<div class="col-xs-3">
 																							Relationship
-																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4" name="beneRelationship" id="beneRelationship">
+																							<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-4" name="beneRelationship" id="beneRelationship" placeholder="Relationship">
 																						</div>
 
 																						<br><br><br>
@@ -818,7 +831,7 @@
 																									<td><?php echo $row['payment_nextDue']; ?></td>
 																									<td style="width: 10px;"><?php echo $row['payment_OR']; ?></td>
 																									<td style="width: 10px;"><?php echo $row['payment_APR']; ?></td>
-																									<td style="width: 20px;"><?php echo $row['premium']; ?></td>
+																									<td style="width: 20px;">Php&nbsp;<?php echo number_format($row['premium'],2); ?></td>
 																									<td><?php echo $row['payment_soaDate']; ?></td>
 																									<td>
 																										<?php

@@ -121,6 +121,7 @@ include 'PHPFile/Connection_Database.php';
 							<script> document.getElementById('clientToRetrieve').value = '<?php echo $row['clientID'];?>';</script>
 							<script> document.getElementById('policyStatusSelect').value = '<?php echo $row['policyID'];?>';</script>
 							<script>document.getElementById("fundButton").disabled = false;</script>
+							<script>document.getElementById("planButton").disabled = false;</script>
 
 							<script> document.getElementById('insuredLastName').value = '<?php echo $row['insured_lastName'];?>';</script>
 							<script> document.getElementById('insuredFirstName').value = '<?php echo $row['insured_firstName'];?>';</script>
@@ -180,6 +181,7 @@ include 'PHPFile/Connection_Database.php';
 						<script> document.getElementById('clientToRetrieve').value = '<?php echo $row['clientID'];?>';</script>
 						<script> document.getElementById('policyStatusSelect').value = '<?php echo $row['policyID'];?>';</script>
 						<script>document.getElementById("fundButton").disabled = false;</script>
+						<script>document.getElementById("planButton").disabled = false;</script>
 
 						<?php
 				}
