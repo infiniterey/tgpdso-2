@@ -46,7 +46,7 @@
         <label class="control-label">
         Due Date:
       </label>
-      <input type="date" class="form-control aswidth" name="paymentDueDate" id="paymentDueDate">
+      <input type="date" class="form-control aswidth" name="paymentDueDate" id="paymentDueDate" readonly>
       <input type="date" name="paymentNextDue" id="paymentNextDue" hidden>
       <input type="date" name="paymentNextDueADD" id="paymentNextDueADD" hidden>
       <input type="date" name="dateText" id="dateText" hidden>

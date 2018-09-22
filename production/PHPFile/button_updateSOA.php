@@ -48,11 +48,18 @@
         <label class="control-label">
         Transaction Date:
       </label><input type="date" class="form-control" name="soa_transDate1" id="soa_transDate1"><br>
+      <div class="row">
+        <div class="col-md-10">
       <label class="control-label">
         Name:
       </label>
-      <input  type="text" class="form-control" id="soa_client1" name="soa_client1">
+          <input  type="text" class="form-control" id="soa_client1" name="soa_client1">
+      </div>
+      <div class="col-md-2">
+          <button type="button" name="searchClient" id="searchClient" class="btn btn-primary" data-target="#clientSearchSOA" data-toggle="modal" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
       <input  type="text" id="soa_name1" name="soa_name1" hidden><br>
+    </div>
+      </div>
         <label class="control-label">
         Issue Date:
       </label><input type="date" class="form-control" name="soa_issueDate1" id="soa_issueDate1"><br>

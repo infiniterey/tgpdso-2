@@ -19,10 +19,10 @@ include 'PHPFile/Connection_Database.php';
 
           $policyNo = $_POST['policyNoOwner'];
           $plan = $_POST['policyPlan'];
-          $faceAmount = $_POST['policyFaceAmount']);
+          $faceAmount = $_POST['policyFaceAmount'];
           $MOP = $_POST['policyMOP'];
           $issueDate = $_POST['policyIssueDate'];
-          $premium = $_POST['policyPremium']);
+          $premium = $_POST['policyPremium'];
           $policyStatus = $_POST['policyStatusSelect'];
           $policyDueDate = $_POST['policyDueDate'];
           $policyRate = $_POST['planRate'];

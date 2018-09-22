@@ -286,12 +286,12 @@
 																					}
 																					?>
 																							<div class="col-md-10">
-																								<input placeholder="Fund" value="<?php echo $name; ?>" readonly="readonly" style="border:none; width: 180px;" type="text" class="form-control col-md-7 col-xs-12" name="policyFund" id="policyFund">
+																								<input placeholder="Fund" value="<?php echo $name; ?>" readonly="readonly" type="text" class="form-control" name="policyFund" id="policyFund">
 																							</div>
 																							<div class="col-md-2" style="margin-left: -19px;">
 																								<input id="policyRate" name="policyRate" hidden>
 																								<input id="getFundID" name="getFundID" hidden>
-																								<button style="width: 40px;" type="button" data-toggle="modal" data-target="#fundModal" class="btn btn-primary" name="fundButton" id="fundButton" disabled><i class="fa fa-plus"></i></button>
+																								<button style="margin-left: 4px;width: 40px;" type="button" data-toggle="modal" data-target="#fundModal" class="btn btn-primary" name="fundButton" id="fundButton" disabled><i class="fa fa-plus"></i></button>
 																					</div>
 																					</div>
 																					</div>
@@ -759,7 +759,7 @@
 																						if(isset($_GET['edit']))
 																						{
 																						$edit = $_GET['edit'];
-																						$sql = "SELECT * FROM payment, production WHERE payment_policyNo = policyNo AND payment_policyNo = '$edit' ORDER BY YEAR(payment_nextDue) DESC, MONTH(payment_nextDue) DESC, DAY(payment_nextDue) DESC";
+																						$sql = "SELECT * FROM payment, production WHERE payment_policyNo = policyNo AND payment_policyNo = '$edit' ORDER BY payment_ID DESC";
 
 
 																						$currentDate = '';
@@ -831,21 +831,34 @@
 																									<td><?php echo $row['payment_nextDue']; ?></td>
 																									<td style="width: 10px;"><?php echo $row['payment_OR']; ?></td>
 																									<td style="width: 10px;"><?php echo $row['payment_APR']; ?></td>
-																									<td style="width: 20px;">Php&nbsp;<?php echo number_format($row['premium'],2); ?></td>
+																									<td style="width: 20px;">Php&nbsp;<?php echo $row['premium'] ?></td>
 																									<td><?php echo $row['payment_soaDate']; ?></td>
 																									<td>
 																										<?php
 
 																										if($currentDate == $previousDate)
 																										{
+																											if(!empty($row['payment_soaDate']))
+																											{
+																												?>
+																												<script>document.getElementById("paymentDueDate").readOnly = false;</script>
+																												<div align="center">
+																													<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a>
+																												</div>
+																												<?php
+																											}
+																											else
+																											{
 																											$currentDate = $row['payment_nextDue'];
 																											?>
 																											<div align="center">
 																												<button type="button" title="Edit Data" data-toggle="modal" data-target="#paymentModalEdit" class="btn btn-primary" style="font-size: 16px;"><i class="fa fa-pencil"></i></button>
 																												<a title="Delete Data" onclick="return confirm('Are you sure to delete?')" href="records.php?deletePayment=<?php echo $row['payment_policyNo'] ?>&list=<?php echo $row['payment_ID']?>" class="btn btn-danger"style="font-size: 16px;"><i class="fa fa-trash"></i></a>
+
 																											</div>
 																											<?php
 																										}
+																									}
 																										else
 																										{
 																											?>
@@ -853,16 +866,8 @@
 																												<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a>
 																											</div>
 																											<?php
-																										}
+																									}
 																										$previousDate = $currentDate;
-																										if(!empty($row['payment_soaDate']))
-																										{
-																											?>
-																											<div align="center">
-																												<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a>
-																											</div>
-																											<?php
-																										}
 																										?>
 																									</td>
 																									<td hidden><?php echo $row['payment_policyNo']; ?></td>
