@@ -117,6 +117,7 @@ else
 
 					$sql=mysqli_query($conn,"SELECT * from production, payment, client, agents WHERE policyNo = payment_policyNo AND agentCode = agent AND clientID = prodclientID AND policyNo = '$edit'");
 
+
 					while($row=mysqli_fetch_Array($sql))
 					{
 						?>
@@ -132,12 +133,15 @@ else
             <script> document.getElementById('soa_agent').value = '<?php echo $row['agentCode'];?>';</script>
             <script> document.getElementById('soa_agentname').value = '<?php echo $row['agentLastname'].", ".$row['agentFirstname']." ".$row['agentMiddlename']?>';</script>
             <script> document.getElementById('soa_dueDate').value = '<?php echo $row['payment_dueDate'];?>';</script>
-            <script>
-              window.location="soa.php?edit=<?php echo $edit ?>&#addSOAModal";
-            </script>
 					<?php
-
 				}
+        ?>
+          <script>        $(document).ready(function () {
+
+                          $('#addSOAModal').modal('show');
+
+                      });</script>
+        <?php
 				$conn->close();
 	}
 }

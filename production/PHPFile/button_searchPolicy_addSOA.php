@@ -16,6 +16,12 @@
          <th class="sorting" tabindex="0" aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="OR No.: activate to sort column ascending" style="width: 30px;text-align:center;">Action</th>
          </tr>
      </thead>
+     <script>
+      function clickLink()
+      {
+        $("#searchClient").click();
+      }
+     </script>
      <tbody>
        <?php
          $DB_con = Database::connect();
@@ -41,7 +47,7 @@
                <td><?php echo $row['cLastname']. ", " .$row['cFirstname']; ?></td>
                <td>
                  <div class = "row" align="center">
-                     <a id="searchClient" title="Edit Data" href="soa.php?edit=<?php echo $row['policyNo'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+                     <a id="searchClient" title="Edit Data" href="soa.php?edit=<?php echo $row['policyNo'] ?>" onclick="clickLink()" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                      <input id="retrieveClientID" name="retrieveClientID" value="<?php echo $row['clientID']; ?>" hidden>
                   </div>
                </td>
