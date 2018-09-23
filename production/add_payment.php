@@ -11,11 +11,11 @@
         <label class="control-label">
         Policy #:
         </label>
-       <input type="text" readonly="readonly" class="form-control aswidth" name="paymentPolicyNo" id="paymentPolicyNo">
+       <input type="text" readonly="readonly" class="form-control aswidth" name="paymentPolicyNo" id="paymentPolicyNo" placeholder="Policy #">
        <br>
         <label class="control-label">
         Issue Date:
-      </label><input type="date" class="form-control aswidth" name="paymentIssueDate" id="paymentIssueDate" readonly>
+      </label><input type="date" class="form-control aswidth" name="paymentIssueDate" id="paymentIssueDate" readonly placeholder="Issue Date">
       <br>
       <label class="control-label">
       Mode of Payment:
@@ -31,22 +31,22 @@
       <label class="control-label">
       Amount:
       </label>
-      <input  type="text" class="form-control aswidth" id="paymentAmount" name="paymentAmount">
+      <input  type="text" class="form-control aswidth" id="paymentAmount" name="paymentAmount" placeholder="Amount">
       </div>
       <div class="col-sm-6">
         <label class="control-label">
         Transaction Date:
-      </label><input type="date" class="form-control aswidth" name="paymentTransDate" id="paymentTransDate"><br>
+      </label><input type="date" class="form-control aswidth" name="paymentTransDate" id="paymentTransDate" placeholder="Transaction Date"><br>
         <label class="control-label">
         OR #:
-      </label><input type="text" class="form-control aswidth" name="paymentORNo" id="paymentORNo"><br>
+      </label><input type="text" class="form-control aswidth" name="paymentORNo" id="paymentORNo" placeholder="OR #"><br>
         <label class="control-label">
         APR #:
-      </label><input type="text" class="form-control aswidth" name="paymentAPR" id="paymentAPR"><br>
+      </label><input type="text" class="form-control aswidth" name="paymentAPR" id="paymentAPR" placeholder="APR #"><br>
         <label class="control-label">
         Due Date:
       </label>
-      <input type="date" class="form-control aswidth" name="paymentDueDate" id="paymentDueDate" readonly>
+      <input type="date" class="form-control aswidth" name="paymentDueDate" id="paymentDueDate" readonly placeholder="Due Date">
       <input type="date" name="paymentNextDue" id="paymentNextDue" hidden>
       <input type="date" name="paymentNextDueADD" id="paymentNextDueADD" hidden>
       <input type="date" name="dateText" id="dateText" hidden>

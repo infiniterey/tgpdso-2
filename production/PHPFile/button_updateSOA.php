@@ -20,6 +20,38 @@
 
         </div>
 <div class="row">
+  <script>
+  jQuery(function($) {
+  $('input.number').on('keyup', function() {
+    if(event.which >= 37 && event.which <= 40) return;
+    $(this).val(function(index, value) {
+      return value
+      .replace(/\D/g, "")
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        });
+      });
+    });
+  </script>
+  <script>
+     function commissionUpdateSOA()
+     {
+       document.getElementById("soa_commission1").value="";
+       var premium = document.getElementById("soa_premium1").value;
+       premium = premium.replace(/,/g , "");
+
+       var rate = document.getElementById("soa_rate1").value;
+       var rate2 = premium / 100;
+       var str = rate.slice(0, -1);
+       str = str/100;
+       var result = premium*str;
+       result =  result.toLocaleString('en', {maximumSignificantDigits : 21});
+       document.getElementById("soa_commission1").value = result;
+       // var resultCom = document.getElementById("soa_commission1").value;
+       // resultCom =  resultCom.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       // document.getElementById("soa_commission1").value = resultCom;
+     }
+   </script>
+   <br>
           <div class="col-md-6">
             <label class="control-label">
               SOA Date:
@@ -57,35 +89,51 @@
       </div>
       <div class="col-md-2">
           <button type="button" name="searchClient" id="searchClient" class="btn btn-primary" data-target="#clientSearchSOA" data-toggle="modal" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
-      <input  type="text" id="soa_name1" name="soa_name1" hidden><br>
+      <input  type="text" id="soa_name1" name="soa_name1" hidden>
     </div>
       </div>
+      <br>
         <label class="control-label">
         Issue Date:
       </label><input type="date" class="form-control" name="soa_issueDate1" id="soa_issueDate1"><br>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" style="margin-top: -77px;">
       <label class="control-label">
       Mode of Payment:
     </label>
     <select id="soaMOP1" name="soaMOP1" class="form-control">
     <option id="soaMOP1" name="soaMOP1">Select MOP</option>
-      <option id="soaMOP1" name="soaMOP1" value="Monthly">Montly</option>
-        <option id="soaMOP1" name="soaMOP1" value="Quarterly">Quarterly</option>
-          <option id="soaMOP1" name="soaMOP1" value="Semi-Annual">Semi-Annual</option>
-            <option id="soaMOP1" name="soaMOP1" value="Annual">Annual</option>
+    <option id="soaMOP1" name="soaMOP1" value="Monthly">Montly</option>
+    <option id="soaMOP1" name="soaMOP1" value="Quarterly">Quarterly</option>
+    <option id="soaMOP1" name="soaMOP1" value="Semi-Annual">Semi-Annual</option>
+    <option id="soaMOP1" name="soaMOP1" value="Annual">Annual</option>
     </select>
 
     <br>
         <label class="control-label">
         Premium:
-      </label><input type="text" class="form-control" name="soa_premium1" id="soa_premium1" onchange="commissionUpdateSOA()"><br>
+      </label><input type="text" class="form-control number" name="soa_premium1" id="soa_premium1" onchange="commissionUpdateSOA()"><br>
+
+      <div class="row">
+        <div class="col-md-10">
+        <label class="control-label">
+          Plan:
+        </label><input type="text" class="form-control number" name="soa_plan1" id="soa_plan1">
+      </div>
+        <div class="col-md-2">
+        <button style="margin-left: -14px; margin-top: 24px;" type="button" name="soa_planButton" id="soa_planButton" data-target="#planSearchSOA" data-toggle="modal" class="btn btn-primary"><i class="fa fa-search"></i></button>
+      </div>
+      </div>
+      <br>
+
         <label class="control-label">
         Rate:
       </label><input type="text" class="form-control" name="soa_rate1" id="soa_rate1"><br>
-      <label class="control-label">
-      Commission:
-    </label><input type="text" class="form-control" name="soa_commission1" id="soa_commission1"><br>
+      <div style="margin-top: -7px;">
+        <label class="control-label">
+        Commission:
+        </label><input type="text" class="form-control" name="soa_commission1" id="soa_commission1"><br>
+      </div>
 
     <div class="row">
 
@@ -96,7 +144,7 @@
   <input type="text" class="form-control" name="soa_agentname1" id="soa_agentname1">
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary"name="soaAgent1" id="soaAgent1" data-dismiss="modal" data-toggle="modal" data-target="#searchAgentUpdate" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
+      <button type="button" class="btn btn-primary"name="soaAgent1" id="soaAgent1" data-toggle="modal" data-target="#searchAgentUpdate" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
     </div>
   </div>
   <br>
@@ -104,7 +152,6 @@
   Due Date:
 </label><input type="text" class="form-control" name="soa_dueDate1" id="soa_dueDate1">
 <input type="text" hidden name="soa_ID" id="soa_ID">
-
 
        <br>
      </div>
@@ -227,21 +274,3 @@ include 'PHPFile/Connection_Database.php';
        }
      }
  ?>
-
- <script>
-    function commissionUpdateSOA()
-    {
-      var premium = document.getElementById("soa_premium1").value;
-    //  var number = document.getElementById("soa_rate1").value;
-      var rate = document.getElementById("soa_rate1").value;
-
-
-      var rate2 = premium / 100;
-      var str = rate.slice(0, -1);
-      str = str/100;
-      var result = premium*str;
-      document.getElementById("soa_commission1").value = premium*str;
-      // window.alert(fyc.value);
-      // document.getElementById("myText").value
-    }
-  </script>

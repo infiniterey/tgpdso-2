@@ -1,5 +1,4 @@
-
-  <div class="modal-dialog modal-md">
+<div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" onclick="cancelInfoAgent();" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -7,7 +6,7 @@
       </div>
       <form method='post' name='myform' onsubmit="CheckForm()">
         <div class="modal-body">
-            <table id="datatable-fixed-header91"  align="center" name="datatable-fixed-header91" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info" onclick="showButtons1()">
+            <table id="datatable-fixed-header002"  align="center" name="datatable-fixed-header91" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info" onclick="showButtons1()">
               <thead>
                 <tr role="row">
                   <th hidden></th>
@@ -35,7 +34,7 @@
                           <td><?php print($row['planCode']); ?></td>
                           <td><?php print($row['planDesc']); ?></td>
                           <td><?php print($row['planRate']); ?></td>
-                          <td><button style="width: 100%; height: 100%;" onclick="" type="button" id="retrieveAgent" name="retrieveAgent" data-dismiss="modal" class="btn btn-primary"><i class="glyphicon glyphicon-copy"></i></button></td>
+                          <td><button style="width: 100%; height: 100%;" type="button" id="retrieveAgent" name="retrieveAgent" data-dismiss="modal" class="btn btn-primary"><i class="glyphicon glyphicon-copy"></i></button></td>
 
                         </tr>
                         <?php
@@ -45,27 +44,23 @@
                   ?>
                 </tbody>
             </table>
-
-
             <script>
-
-
-              var table = document.getElementById('datatable-fixed-header91');
+            $(document).ready(function() {
+                $('#datatable-fixed-header002').DataTable( {
+                    "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+                } );
+            } );
+              var table = document.getElementById('datatable-fixed-header002');
               for(var counter = 1; counter < table.rows.length; counter++)
               {
                 table.rows[counter].onclick = function()
               {
-                 document.getElementById("policyPlan").value = this.cells[0].innerHTML;
-                 document.getElementById("planRate").value = this.cells[3].innerHTML;
-                 document.getElementById("planName").value = this.cells[1].innerHTML;
-                 document.getElementById("productionRate").value = this.cells[3].innerHTML;
+                 document.getElementById("soa_rate1").value = this.cells[3].innerHTML;
+                 document.getElementById("soa_plan1").value = this.cells[1].innerHTML;
                   };
                 }
 
-                </script>
-
-
-
+            </script>
         </div>
         <div class="modal-footer">
                               <div>

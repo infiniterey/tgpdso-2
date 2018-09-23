@@ -548,7 +548,7 @@
 	                              <th width="30" class="sorting" tabindex="0" aria-controls="datatable-fixed-header"  aria-label="Mode of Payment: activate to sort column ascending">M.O.P</th>
 	                              <th width="120" class="sorting" tabindex="0" aria-controls="datatable-fixed-header"  aria-label="Issued Date: activate to sort column ascending">Agent</th>
 	                              <th width="20" class="sorting" tabindex="0" aria-controls="datatable-fixed-header"  aria-label="Agent: activate to sort column ascending">Status</th>
-	                              <th width="40" class="sorting" tabindex="0" aria-controls="datatable-fixed-header"  aria-label="Action: activate to sort column ascending">Action</th>
+	                              <th width="50" class="sorting" tabindex="0" aria-controls="datatable-fixed-header"  aria-label="Action: activate to sort column ascending">Action</th>
 															</tr>
 	                          </thead>
 
@@ -582,13 +582,13 @@
 	                                        <td><?php print($row['cLastname']. ", " .$row['cFirstname']. " " .$row['cMiddlename']); ?></td>
 	                                        <td><?php print($row['policyNo']); ?></td>
 	                                        <td><?php print($row['receiptNo']); ?></td>
-	                                        <td><?php print($row['premium']); ?></td>
+	                                        <td>Php&nbsp;<?php print($row['premium']); ?></td>
 	                                        <td><?php print($row['modeOfPayment']); ?></td>
 	                                        <td><?php print($row['agentLastname']. ", " .$row['agentFirstname']); ?></td>
 	                                        <td><?php print($row['remarks']); ?></td>
-																					<td>
+																					<td style="width: 100%">
 																						<center>
-																								<a title="Edit Data" href="newBusinessForm.php?edit=<?php echo $row['prodID'] ?>" class="btn btn-danger"><i class="fa fa-pencil"></i></a>
+																								<a title="Edit Data" href="newBusinessForm.php?edit=<?php echo $row['prodID'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 																								<a title="Delete Data" onclick="return confirm('Are you sure to delete?')" href="newBusiness.php?delete=<?php echo $row['prodID'] ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
 																						</center>
 
@@ -623,15 +623,15 @@
 	                                        <td><?php print($row['cLastname']. ", " .$row['cFirstname']. " " .$row['cMiddlename']); ?></td>
 	                                        <td><?php print($row['policyNo']); ?></td>
 	                                        <td><?php print($row['receiptNo']); ?></td>
-	                                        <td><?php print($row['premium']); ?></td>
+	                                        <td>Php&nbsp;<?php print($row['premium']); ?></td>
 	                                        <td><?php print($row['modeOfPayment']); ?></td>
 	                                        <td><?php print($row['agentLastname']. ", " .$row['agentFirstname']); ?></td>
 	                                        <td><?php print($row['remarks']); ?></td>
-																					<td style="width: 100%; align:center">
-																						<div class="row">
+																					<td style="width: 100%">
+																						<center>
 																								<a title="Edit Data" href="newBusinessForm.php?edit=<?php echo $row['prodID'] ?>" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 																								<a title="Delete Data" onclick="return confirm('Are you sure to delete?')" href="newBusiness.php?delete=<?php echo $row['prodID'] ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-																						<div>
+																						</center>
 																					</td>
 
 	                                      </tr>
@@ -1087,7 +1087,7 @@ $premium = filter_input(INPUT_POST, 'premium');
 $rate = filter_input(INPUT_POST, 'rate');
 $modeOfPayment = filter_input(INPUT_POST, 'modeOfPayment');
 $agent = filter_input(INPUT_POST, 'agentCode');
-$remarks = filter_input(INPUT_POST, 'remarks');
+$remarks = "New";
 $plan = filter_input(INPUT_POST, 'planCodePass');
 $host = "localhost";
 $dbusername = "root";

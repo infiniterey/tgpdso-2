@@ -189,3 +189,27 @@ include 'PHPFile/Connection_Database.php';
 		$conn->close();
 	}
 }
+?>
+<?php
+include 'PHPFile/Connection_Database.php';
+if(mysqli_connect_error())
+{
+ die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
+}
+else
+{
+	if(isset($_GET['edit']))
+	{
+		$edit = $_GET['edit'];
+		$result=mysqli_query($conn,"SELECT * FROM production WHERE policyNo = '$edit'");
+		while($row=mysqli_fetch_Array($result))
+		{
+			?>
+			<script> document.getElementById('productionCommission1').value = '<?php echo $row['FYC'];?>';</script>
+			<script> document.getElementById('productionRate').value = '<?php echo $row['rate'];?>';</script>
+		<?php
+		}
+	$conn->close();
+	}
+}
+?>

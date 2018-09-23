@@ -199,18 +199,35 @@
 																		 </div><br/>
 																		 <div class="form-group">
 																			 <h5><b>Policy Details</b></h5><hr>
-																			 	<script>
+																				<script>
 																				jQuery(function($) {
-    																		$('input.number').on('keyup', function() {
+																				$('input.number').on('keyup', function() {
 																					if(event.which >= 37 && event.which <= 40) return;
 																					$(this).val(function(index, value) {
 																						return value
 																						.replace(/\D/g, "")
 																						.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 																							});
-    																				});
+																						});
 																					});
 																				</script>
+																				<script>
+																					 function commissionCalculate()
+																					 {
+																						 var premium = document.getElementById("policyPremium").value;
+																						 premium = premium.replace(/,/g , "");
+																						 var rate = document.getElementById("productionRate").value;
+																						 var rate2 = premium / 100;
+																						 var str = rate.slice(0, -1);
+																						 str = str/100;
+																						 var result = premium*str;
+																						 result =  result.toLocaleString('en', {maximumSignificantDigits : 21});
+																						 document.getElementById("productionCommission1").value = result;
+																						 // var resultCom = document.getElementById("productionCommission1").value;
+																						 // resultCom =  resultCom.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+																						 // document.getElementById("productionCommission1").value = resultCom;
+																					 }
+																				 </script>
 																			 <div class="row">
 																		 			 <div class="col-xs-3">
 																						 Plan
@@ -242,14 +259,16 @@
 																					 </div>
 																				 <div class="col-sm-3 ">
 																						 Issue Date
-																						 <input style="cursor:auto" style="border:none" type="date" class="form-control col-md-7 col-xs-4" name="policyIssueDate" id="policyIssueDate" value="mm/dd/yyyy"  onchange="handler();">
+																						 <input style="cursor:auto" style="border:none" type="date" class="form-control col-md-7 col-xs-4" name="policyIssueDate" id="policyIssueDate" value="mm/dd/yyyy"  onchange="handler();" required>
 																					 </div>
 																	 	 		</div>
 																				<div class="row">
 
 																					<div class="col-xs-3">
 																						Premium
-																						<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12 number" name="policyPremium" id="policyPremium" placeholder="Premium" ng-currency><br>
+																						<input style="cursor:auto" style="border:none" type="text" class="form-control col-md-7 col-xs-12 number" name="policyPremium" id="policyPremium" placeholder="Premium" onchange="commissionCalculate()"><br>
+																						<input name="productionCommission1" id="productionCommission1" type="text" hidden>
+																						<input name="productionRate" id="productionRate" type="text" hidden>
 																					</div>
 																					<div class="col-xs-3">
 																						Fund

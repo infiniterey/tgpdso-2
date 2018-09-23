@@ -127,7 +127,7 @@
                                           <td style="text-align:center; width: 10px;"><?php print($row['policyNo']); ?></td>
                                           <td style="text-align:center; width: 10px;"><?php print($row['planCode']); ?></td>
 																					<td style="text-align:center; width: 20px;"><?php print($row['modeOfPayment']); ?></td>
-																					<td style="text-align:center; width: 20px;"><?php print($row['premium']); ?></td>
+																					<td style="text-align:center; width: 20px;">Php&nbsp;<?php print($row['premium']); ?></td>
 																					<td style="text-align:center; width: 100px;"><?php print($row['payment_dueDate']); ?></td>
 																					<td style="text-align:center; width: 30px;">
 																						<div class="row">

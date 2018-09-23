@@ -4,6 +4,7 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <head>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	<style>
 	table {
 		    width: 100px;
@@ -52,6 +53,18 @@
           <!-- page content -->
 					<script>
 
+					  jQuery(function($) {
+					  $('input.number').on('keyup', function() {
+					    if(event.which >= 37 && event.which <= 40) return;
+					    $(this).val(function(index, value) {
+					      return value
+					      .replace(/\D/g, "")
+					      .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+					        });
+					      });
+					    });
+
+
 					$(function () {
     			$('#modal-container').on('hidden.bs.modal', function () {
         	$(this).removeData('bs.modal');
@@ -69,7 +82,7 @@
 						}
 
 					</script>
-					<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="addplanmodal" data-keyboard="false" data-backdrop="static">
+					<div class="modal fade bs-example-modal-sm" tabindex="-1" aria-hidden="true" id="addplanmodal" data-keyboard="false" data-backdrop="static">
 						<div class="modal-dialog modal-lg">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -106,12 +119,11 @@
 											<table id="datatable-fixed-header1"  align="center" name="datatable-fixed-header1" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info" onclick="showButtons1()">
 												<thead>
 													<tr role="row">
-															<th></th>
+														<th></th>
 														<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Plan Code" style="width: 50px;text-align:center;">Plan Code</th>
-															<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-label="Plan Description" style="width: 100px;">Plan Description</th>
+														<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-label="Plan Description" style="width: 100px;">Plan Description</th>
 														<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-label="Plan Rate" style="width: 35px;text-align:center;">Plan Rate</th>
 														<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header1" rowspan="1" colspan="1" aria-label="Action" style="width: 35px;text-align:center;">Action</th>
-
 													</tr>
 												</thead>
 
@@ -135,7 +147,6 @@
 																		<td><?php print($row['planDesc']); ?></td>
 																		<td><?php print($row['planRate']); ?></td>
 																		<td><button style="width: 100%; height: 100%;" onclick="" type="button" id="retrieveAgent" name="retrieveAgent" data-dismiss="modal" class="btn btn-primary"><i class="glyphicon glyphicon-copy"></i></button></td>
-
 																	</tr>
 																	<?php
 																}
@@ -196,7 +207,7 @@
 						</div>
 
 <!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->
-						<div class="modal fade" id="myModal">
+						<div class="modal fade" id="myModal" data-keyboard="false" data-backdrop="static">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
 
@@ -305,11 +316,9 @@
 						</div>
 <!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->
 <!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->		<!-- The Modal -->
-						<div class="modal fade" tabindex="-1" role="dialog" id="clientSearch" name-"clientSearch" data-keyboard="false" data-backdrop="static">
+						<div class="modal fade"  id="clientSearch" name="clientSearch" data-keyboard="false" data-backdrop="static">
 								<div class="modal-dialog modal-lg">
 						    <div class="modal-content">
-
-
 						      <div class="modal-header">
 						        <h2 class="modal-title">Search Client <button type="button" class="close" data-dismiss="modal" onclick="cancelDetail();">x</button></h2>
 						      </div>
@@ -388,7 +397,7 @@
 
 										<div class="col-md-6">
 
-										<table id="datatable-fixed-header3" align="center" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info" onclick="showButtons1()">
+										<table id="datatable-fixed-header3" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info" onclick="showButtons1()">
 											<thead>
 												<tr role="row">
 													<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header3" rowspan="1" colspan="1" style="width: 50px;" aria-label="ClientID">ClientID</th>
@@ -555,13 +564,13 @@
 																	Face Amount
 														</label>
 														<div class="col-sm-10">
-															<input type="text" id="faceAmount" name="faceAmount" required="required" class="form-control" placeholder="Face Amount" required><br>
+															<input type="text" id="faceAmount" name="faceAmount" required="required" class="form-control number" placeholder="Face Amount" required><br>
 														</div>
 														<label class="control-label col-sm-2" >
 																	Premium <span class="required">*</span>
 														</label>
 														<div class="col-sm-10">
-															<input type="text" id="premium" name="premium" required="required" onchange="commission()" class="form-control" placeholder="Premium" required><br>
+															<input type="text" id="premium" name="premium" required="required" onchange="commission()" class="form-control number" placeholder="Premium" required><br>
 														</div>
 														<label class="control-label col-sm-2" >
 															Rate <span class="required">*</span><br>
@@ -573,7 +582,7 @@
 															FYC
 														</label>
 														<div class="col-sm-10">
-															<input type="text" id="fyc" name="fyc" class="form-control" placeholder="First Year Commission" required readonly><br>
+															<input type="text" id="fyc" name="fyc" class="form-control number" placeholder="First Year Commission" required readonly><br>
 														</div>
 														<label class="control-label col-sm-2" >
 															Mode of Payment <span class="required">*</span><br>

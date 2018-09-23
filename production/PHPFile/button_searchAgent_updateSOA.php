@@ -1,7 +1,7 @@
 <div class="modal-dialog modal-md" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#addSOAModal" aria-label="Close"><span aria-hidden="true">×</span></button>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
       <h4 class="modal-title" id="myModalLabel2">Search Agent</h4>
     </div>
     <form method="post" name="myform" action="<?php $_PHP_SELF ?>">
@@ -34,7 +34,7 @@
                       <td><?php print($row['agentLastname'].",".$row['agentFirstname']." ".$row['agentMiddlename']); ?></td>
                       <td align="center">
                         <div class="row">
-                          <button  class="btn btn-primary" name="buttonsearchAgent" data-target="#searchAgentUpdate">Get&nbsp;<i class="fa fa-arrow-right"></i></a>
+                          <button  class="btn btn-primary" name="buttonsearchAgent" data-target="#searchAgentUpdate" data-dismiss="modal">Get&nbsp;<i class="fa fa-arrow-right"></i></a>
                         </div>
                       </td>
                     </tr>
@@ -57,7 +57,7 @@
                       <td><?php print($row['agentLastname'].",".$row['agentFirstname']." ".$row['agentMiddlename']); ?></td>
                       <td align="center">
                         <div class="row">
-                          <button  type="button" data-dismiss="modal" data-toggle="modal" data-target="#updateModal" class="btn btn-primary" name="buttonsearchAgent">Get&nbsp;<i class="fa fa-arrow-right"></i></a>
+                          <button  type="button" data-target="#searchAgentUpdate" data-dismiss="modal" class="btn btn-primary" name="buttonsearchAgent">Get&nbsp;<i class="fa fa-arrow-right"></i></a>
                         </div>
                       </td>
                     </tr>

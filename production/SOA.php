@@ -4,6 +4,7 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <head>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	<style>
 table tr:not(:first-child){
 	cursor:pointer;transition: all .25s	ease-in-out;
@@ -114,11 +115,11 @@ overflow-y:auto;
 																	$userTypeItSelf = $_SESSION["usertype"];
 																	if($_SESSION["usertype"] == "Secretary" || $_SESSION["usertype"] == "secretary")
 																	{
-																		$sql = "SELECT * FROM production, payment, agents, client, team WHERE agentCode = agent AND agentTeam = teamID AND teamName = '$teamItSelf' AND payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
+																		$sql = "SELECT * FROM production, payment, agents, client, team, plans WHERE planID = plan AND agentCode = agent AND agentTeam = teamID AND teamName = '$teamItSelf' AND payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
 																	}
 																	else
 																	{
-																		$sql = "SELECT * FROM production, payment, agents, client WHERE payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
+																		$sql = "SELECT * FROM production, payment, agents, client, plans WHERE planID = plan AND payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
 																	}
 																	$result = $DB_con->query($sql);
 																	if($result->rowCount()>0){
@@ -130,9 +131,9 @@ overflow-y:auto;
 																				<td><?php print($row['cLastname'].",".$row['cFirstname']." ".$row['cMiddlename']);?></td>
 																				<td><?php print($row['payment_policyNo']); ?></td>
 																				<td><?php print($row['payment_MOP']); ?></td>
-																				<td><?php print($row['premium']); ?></td>
+																				<td>Php&nbsp;<?php print($row['premium']); ?></td>
 																				<td><?php print($row['rate']); ?></td>
-																				<td><?php print($row['FYC']); ?></td>
+																				<td>Php&nbsp;<?php print($row['FYC']); ?></td>
 																				<td><?php print($row['agentLastname'].",".$row['agentFirstname']." ".$row['agentMiddlename']); ?></td>
 																				<td>
 																					<div class="row">
@@ -155,6 +156,8 @@ overflow-y:auto;
 																				<td hidden><?php print($row['agentLastname'].", ".$row['agentFirstname']." ".$row['agentMiddlename']); ?></td>
 																				<td hidden><?php print($row['payment_dueDate']); ?></td>
 																				<td hidden><?php print($row['payment_ID']); ?></td>
+																				<td hidden><?php print($row['planCode']); ?></td>
+																				<td hidden><?php print($row['planID']); ?></td>
 																			</tr>
 																			<?php
 																		}
@@ -182,6 +185,7 @@ overflow-y:auto;
 														 document.getElementById("soa_agentname1").value = this.cells[21].innerHTML;
 														 document.getElementById("soa_dueDate1").value = this.cells[22].innerHTML;
 														 document.getElementById("soa_ID").value = this.cells[23].innerHTML;
+														 document.getElementById("soa_plan1").value = this.cells[24].innerHTML;
 															};
 														}
 													</script>
@@ -211,14 +215,17 @@ overflow-y:auto;
 <div class="modal fade" name="addSOASearchPolicy" id="addSOASearchPolicy" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 	<?php include 'PHPFile/button_searchPolicy_addSOA.php'; ?>
 </div>
-<div class="modal fade" name="searchAgent" id="searchAgent" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" name="searchAgent" id="searchAgent" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
 	<?php include 'PHPFile/button_searchAgent_addSOA.php'; ?>
 </div>
-<div class="modal fade" name="searchAgentUpdate" id="searchAgentUpdate" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" name="searchAgentUpdate" id="searchAgentUpdate" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
 	<?php include 'PHPFile/button_searchAgent_updateSOA.php'; ?>
 </div>
-<div class="modal fade" tabindex="-1" role="dialog" id="clientSearchSOA" name-"clientSearchSOA" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
+<div class="modal fade" tabindex="-1" role="dialog" id="clientSearchSOA" name="clientSearchSOA" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
 	<?php include 'PHPFile/button_searchClient_updateSOA.php'; ?>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="planSearchSOA" name="planSearchSOA" data-keyboard="false" data-backdrop="static" style="margin-top: 30px;">
+	<?php include 'PHPFile/button_add_plan_SOA.php'; ?>
 </div>
 	<footer style="margin-bottom: -15px;">
 		<center>

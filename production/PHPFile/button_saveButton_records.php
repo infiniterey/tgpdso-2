@@ -1,6 +1,5 @@
 <?php
 include 'PHPFile/Connection_Database.php';
-
       if(mysqli_connect_error())
       {
         die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
@@ -9,32 +8,33 @@ include 'PHPFile/Connection_Database.php';
       {
 				if(isset($_POST['saveButton']))
 				{
-					$insuredLastname = $_POST['insuredLastName'];
-					$insuredFirstname = $_POST['insuredFirstName'];
-					$insuredMiddlename = $_POST['insuredMiddleName'];
-					$insuredBirthdate = $_POST['insuredBirthdate'];
-					$insuredAddress = $_POST['insuredAddress'];
-					$insuredContact = $_POST['insuredContactno'];
-					$add = $_POST['policyNoOwner'];
+        $insuredLastname = $_POST['insuredLastName'];
+        $insuredFirstname = $_POST['insuredFirstName'];
+        $insuredMiddlename = $_POST['insuredMiddleName'];
+        $insuredBirthdate = $_POST['insuredBirthdate'];
+        $insuredAddress = $_POST['insuredAddress'];
+        $insuredContact = $_POST['insuredContactno'];
+        $add = $_POST['policyNoOwner'];
 
-          $policyNo = $_POST['policyNoOwner'];
-          $plan = $_POST['policyPlan'];
-          $faceAmount = $_POST['policyFaceAmount'];
-          $MOP = $_POST['policyMOP'];
-          $issueDate = $_POST['policyIssueDate'];
-          $premium = $_POST['policyPremium'];
-          $policyStatus = $_POST['policyStatusSelect'];
-          $policyDueDate = $_POST['policyDueDate'];
-          $policyRate = $_POST['planRate'];
+        $policyNo = $_POST['policyNoOwner'];
+        $plan = $_POST['policyPlan'];
+        $faceAmount = $_POST['policyFaceAmount'];
+        $MOP = $_POST['policyMOP'];
+        $issueDate = $_POST['policyIssueDate'];
+        $premium = $_POST['policyPremium'];
+        $policyStatus = $_POST['policyStatusSelect'];
+        $policyDueDate = $_POST['policyDueDate'];
+        $policyRate = $_POST['planRate'];
 
-          $clientID = $_POST['clientToRetrieve'];
-          $lastname = $_POST['lastname1'];
-          $firstname = $_POST['firstname1'];
-          $middlename = $_POST['middlename1'];
-          $birthdate = $_POST['birthdate1'];
-          $address = $_POST['address1'];
-          $contactno = $_POST['contactno1'];
-
+        $clientID = $_POST['clientToRetrieve'];
+        $lastname = $_POST['lastname1'];
+        $firstname = $_POST['firstname1'];
+        $middlename = $_POST['middlename1'];
+        $birthdate = $_POST['birthdate1'];
+        $address = $_POST['address1'];
+        $contactno = $_POST['contactno1'];
+        $commission = $_POST['productionCommission1'];
+        $rate = $_POST['productionRate'];
 
           $query = "SELECT * FROM insuredpolicy, client, production WHERE clientID = prodclientID AND policyNo = insured_policyNo AND policyNo = '$add'";
           $data = mysqli_query($conn, $query);
@@ -57,7 +57,9 @@ include 'PHPFile/Connection_Database.php';
             issuedDate = '$issueDate',
             premium = '$premium',
             policyStat = '$policyStatus',
-            dueDate = '$policyDueDate'";
+            dueDate = '$policyDueDate',
+            FYC = '$commission',
+            rate = '$rate'";
 
             if($conn->query($sql))
             {
@@ -113,6 +115,14 @@ include 'PHPFile/Connection_Database.php';
       else {
 				if(isset($_POST['saveButton']))
 				{
+          $clientID = $_POST['clientToRetrieve'];
+          $lastname = $_POST['lastname1'];
+          $firstname = $_POST['firstname1'];
+          $middlename = $_POST['middlename1'];
+          $birthdate = $_POST['birthdate1'];
+          $address = $_POST['address1'];
+          $contactno = $_POST['contactno1'];
+
           $sql = "UPDATE client
           SET clientID = '$clientID',
           cLastname = '$lastname',
@@ -155,10 +165,10 @@ include 'PHPFile/Connection_Database.php';
 
                 $policyNo = $_POST['policyNoOwner'];
                 $plan = $_POST['policyPlan'];
-                $faceAmount = str_replace(array(',', 'US$', ' '), '', $_POST['policyFaceAmount']);
+                $faceAmount = $_POST['policyFaceAmount'];
                 $MOP = $_POST['policyMOP'];
                 $issueDate = $_POST['policyIssueDate'];
-                $premium = str_replace(array(',', 'US$', ' '), '', $_POST['policyPremium']);
+                $premium = $_POST['policyPremium'];
                 $policyStatus = $_POST['policyStatusSelect'];
                 $policyDueDate = $_POST['policyDueDate'];
                 $policyIssueDate = $_POST['policyIssueDate'];
@@ -222,10 +232,10 @@ include 'PHPFile/Connection_Database.php';
 
                       $policyNo = $_POST['policyNoOwner'];
                       $plan = $_POST['policyPlan'];
-                      $faceAmount = str_replace(array(',', 'US$', ' '), '', $_POST['policyFaceAmount']);
+                      $faceAmount = $_POST['policyFaceAmount'];
                       $MOP = $_POST['policyMOP'];
                       $issueDate = $_POST['policyIssueDate'];
-                      $premium = str_replace(array(',', 'US$', ' '), '', $_POST['policyPremium']);
+                      $premium = $_POST['policyPremium'];
                       $policyStatus = $_POST['policyStatusSelect'];
                       $policyDueDate = $_POST['policyDueDate'];
 
@@ -251,7 +261,9 @@ include 'PHPFile/Connection_Database.php';
                         premium = '$premium',
                         policyStat = '$policyStatus',
                         dueDate = '$policyDueDate',
-                        policyNo = '$add'
+                        policyNo = '$add',
+                        FYC = '$commission',
+                        rate = '$rate'
                         WHERE policyNo = '$add'";
 
                         if($conn->query($sql))
