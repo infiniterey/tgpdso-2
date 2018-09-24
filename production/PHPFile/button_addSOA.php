@@ -15,7 +15,7 @@
       </div>
 
     <div class="col-md-2">
-        <button type="button" class="btn btn-primary"name="soaSearch" id="soaSearch" data-dismiss="modal" data-toggle="modal" data-target="#addSOASearchPolicy" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
+        <button type="button" class="btn btn-primary"name="soaSearch" id="soaSearch" data-toggle="modal" data-target="#addSOASearchPolicy" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
       </div>
         </div>
         <div class="row">
@@ -32,7 +32,7 @@
             });
           </script>
           <script>
-             function commissionUpdateSOA()
+             function commissionAddSOA()
              {
                document.getElementById("soa_commission").value="";
                var premium = document.getElementById("soa_premium").value;
@@ -111,12 +111,13 @@
             <br>
                 <label class="control-label">
                 Premium:
-              </label><input type="text" class="form-control number" name="soa_premium" id="soa_premium" onchange="commissionUpdateSOA()"><br>
+              </label><input type="text" class="form-control number" name="soa_premium" id="soa_premium" onchange="commissionAddSOA()"><br>
 
               <div class="row">
                 <div class="col-md-10">
                 <label class="control-label">
                   Plan:
+                  <input type="text" name="soa_planID" id="soa_planID" hidden>
                 </label><input type="text" class="form-control number" name="soa_plan" id="soa_plan">
               </div>
                 <div class="col-md-2">
@@ -157,7 +158,7 @@
              </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" style="width: 100px;" name="soaUpdate" id="soaUpdate"><i class="fa fa-arrow-up"></i>&nbsp;&nbsp;Update</button>
+                <button type="submit" class="btn btn-primary" style="width: 100px;" name="soaSave" id="soaSave"><i class="fa fa-arrow-up"></i>&nbsp;&nbsp;Update</button>
               </div>
             </form>
           </div>

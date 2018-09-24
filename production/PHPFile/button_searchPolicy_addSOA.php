@@ -1,7 +1,7 @@
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-md">
   <div class="modal-content">
     <div class="modal-header">
-      <h2 class="modal-title">Search Record<button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#addSOAModal" aria-label="Close"><span aria-hidden="true">×</span></button></h2>
+      <h2 class="modal-title">Search Record<button type="button" class="close" data-dismiss="modal" data-toggle="modal" aria-label="Close"><span aria-hidden="true">×</span></button></h2>
 
     </div>
 

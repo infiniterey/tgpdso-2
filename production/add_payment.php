@@ -31,7 +31,7 @@
       <label class="control-label">
       Amount:
       </label>
-      <input  type="text" class="form-control aswidth" id="paymentAmount" name="paymentAmount" placeholder="Amount">
+      <input  type="text" class="form-control aswidth number" id="paymentAmount" name="paymentAmount" placeholder="Amount">
       </div>
       <div class="col-sm-6">
         <label class="control-label">
@@ -68,6 +68,30 @@
 
 </script>
 
+<?php
+include 'PHPFile/Connection_Database.php';
+
+      if(mysqli_connect_error())
+      {
+        die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
+      }
+      else {
+				if(isset($_POST['paymentSaveButton']))
+				{
+          $add = $_POST['paymentPolicyNo'];
+          $zero = "0";
+          $sql = "UPDATE payment SET payment_latest = '$zero' WHERE payment_policyNo = '$add'";
+          if($conn->query($sql))
+          {
+            
+          }
+          else {
+            echo "Error:". $sql."<br>".$conn->error;
+          }
+        }
+        $conn->close();
+      }
+?>
 <?php
 include 'PHPFile/Connection_Database.php';
 
@@ -124,7 +148,7 @@ include 'PHPFile/Connection_Database.php';
                     $calculateMonth = $paymentMonthRemarks + "1";
                     $calculateYear = $paymentYearRemarks + "0";
                   }
-                  else if($paymentMonthRemarks > "12")
+                  else if($paymentMonthRemarks >= "12")
                   {
                     $calculateMonth = "1";
                     $calculateYear = $paymentYearRemarks + "1";
@@ -254,7 +278,7 @@ include 'PHPFile/Connection_Database.php';
 
                 document.getElementById("dateText").value = newdateResult;
                 var valueData = document.getElementById("dateText").value;
-                alert(valueData);
+
                 //window.location="records.php?getDateThis="+valueData+"";
                 // function post()
                 // {
@@ -274,17 +298,18 @@ include 'PHPFile/Connection_Database.php';
               payment_Amount, payment_issueDate,
               payment_MOP, payment_transDate,
               payment_OR, payment_APR, payment_dueDate,
-              payment_nextDue, payment_remarks, payment_remarks_year, payment_remarks_month)
+              payment_nextDue, payment_remarks, payment_remarks_year, payment_remarks_month, payment_latest)
             values ('$paymentPolicyNo','$paymentAmount',
               '$paymentIssueDate','$paymentMOP',
               '$paymentTransDate','$paymentORNo',
               '$paymentAPR','$nextDueDateResult',
                '$nextDueResulter',
-              '$paymentRemarks', '$calculateYear', '$calculateMonth')";
+              '$paymentRemarks', '$calculateYear', '$calculateMonth', '1')";
 
 
             if($conn->query($sql))
             {
+
               ?>
               <script>
               window.location="records.php?edit=<?php echo $paymentPolicyNo ?>";

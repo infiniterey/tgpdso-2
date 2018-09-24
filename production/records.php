@@ -854,39 +854,32 @@
 																									<td><?php echo $row['payment_soaDate']; ?></td>
 																									<td>
 																										<?php
-
-																										if($currentDate == $previousDate)
-																										{
 																											if(!empty($row['payment_soaDate']))
 																											{
 																												?>
 																												<script>document.getElementById("paymentDueDate").readOnly = false;</script>
 																												<div align="center">
-																													<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a>
+																													<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-success"><i class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a>
 																												</div>
 																												<?php
 																											}
-																											else
-																											{
-																											$currentDate = $row['payment_nextDue'];
-																											?>
-																											<div align="center">
-																												<button type="button" title="Edit Data" data-toggle="modal" data-target="#paymentModalEdit" class="btn btn-primary" style="font-size: 16px;"><i class="fa fa-pencil"></i></button>
-																												<a title="Delete Data" onclick="return confirm('Are you sure to delete?')" href="records.php?deletePayment=<?php echo $row['payment_policyNo'] ?>&list=<?php echo $row['payment_ID']?>" class="btn btn-danger"style="font-size: 16px;"><i class="fa fa-trash"></i></a>
-
-																											</div>
-																											<?php
-																										}
+																									else if($row['payment_latest'] == "0")
+																									{
+																										?>
+																										<div align="center">
+																											<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="fa fa-pencil" style="font-size: 16px;"></i></a>
+																										</div>
+																										<?php
 																									}
-																										else
-																										{
-																											?>
-																											<div align="center">
-																												<button type="button" title="Edit Data" data-toggle="modal" style="width: 84px;" data-target="#paymentModalEdit" class="btn btn-primary"><i class="glyphicon glyphicon-edit" style="font-size: 16px;"></i></a>
-																											</div>
-																											<?php
+																									else
+																									{
+																									?>
+																									<div align="center">
+																										<button type="button" title="Edit Data" data-toggle="modal" data-target="#paymentModalEdit" class="btn btn-primary" style="font-size: 16px;"><i class="fa fa-pencil"></i></button>
+																										<a id="deleteBtn" name="deleteBtn" onclick="return confirm('Are you sure to delete?')" title="Delete Data" href="records.php?deletePayment=<?php echo $row['payment_policyNo'] ?>&list=<?php echo $row['payment_ID']?>" class="btn btn-danger"style="font-size: 16px;"><i class="fa fa-trash"></i></a>
+																									</div>
+																									<?php
 																									}
-																										$previousDate = $currentDate;
 																										?>
 																									</td>
 																									<td hidden><?php echo $row['payment_policyNo']; ?></td>
@@ -901,6 +894,8 @@
 																							 </tr>
 																									<?php
 																								}
+																								?>
+																								<?php
 																						}
 																					}
 																						?>
@@ -923,6 +918,7 @@
 			 																				};
 			 																			}
 			 																		</script>
+
 			 																</div>
 																		</div>
 																</div>
@@ -958,6 +954,7 @@
 		<script	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 		<script	src="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"></script>
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
 
 
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="addplanmodal" data-keyboard="false" data-backdrop="static">

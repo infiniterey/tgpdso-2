@@ -55,6 +55,7 @@
               {
                 table.rows[counter].onclick = function()
               {
+                document.getElementById("soa_planID1").value = this.cells[0].innerHTML;
                  document.getElementById("soa_rate1").value = this.cells[3].innerHTML;
                  document.getElementById("soa_plan1").value = this.cells[1].innerHTML;
                   };

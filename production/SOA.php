@@ -184,8 +184,9 @@ overflow-y:auto;
 														 document.getElementById("soa_agent1").value = this.cells[20].innerHTML;
 														 document.getElementById("soa_agentname1").value = this.cells[21].innerHTML;
 														 document.getElementById("soa_dueDate1").value = this.cells[22].innerHTML;
-														 document.getElementById("soa_ID").value = this.cells[23].innerHTML;
+														 document.getElementById("soa_ID1").value = this.cells[23].innerHTML;
 														 document.getElementById("soa_plan1").value = this.cells[24].innerHTML;
+														 document.getElementById("soa_planID1").value = this.cells[25].innerHTML;
 															};
 														}
 													</script>
@@ -212,7 +213,7 @@ overflow-y:auto;
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 	<?php include 'PHPFile/button_updateSOA.php'; ?>
 </div>
-<div class="modal fade" name="addSOASearchPolicy" id="addSOASearchPolicy" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" name="addSOASearchPolicy" id="addSOASearchPolicy" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
 	<?php include 'PHPFile/button_searchPolicy_addSOA.php'; ?>
 </div>
 <div class="modal fade" name="searchAgent" id="searchAgent" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
