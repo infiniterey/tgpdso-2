@@ -6,7 +6,7 @@
       </div>
       <form method='post' name='myform' onsubmit="CheckForm()">
         <div class="modal-body">
-            <table id="datatable-fixed-header002"  align="center" name="datatable-fixed-header002" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info" onclick="showButtons1()">
+            <table id="datatable-fixed-header003"  align="center" name="datatable-fixed-header003" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info" onclick="showButtons1()">
               <thead>
                 <tr role="row">
                   <th hidden></th>
@@ -35,7 +35,7 @@
                           <td><?php print($row['planDesc']); ?></td>
                           <td><?php print($row['planRate']); ?></td>
                           <td>
-                              <button onclick="VV1();" style="width: 100%; height: 100%;" type="button" id="retrieveAgent" name="retrieveAgent" data-dismiss="modal" class="btn btn-primary"><i class="glyphicon glyphicon-copy"></i></button>
+                              <button onclick="VV2();" style="width: 100%; height: 100%;" type="button" id="retrieveAgent" name="retrieveAgent" data-dismiss="modal" class="btn btn-primary"><i class="glyphicon glyphicon-copy"></i></button>
                           </td>
 
                         </tr>
@@ -48,20 +48,20 @@
             </table>
             <script>
             $(document).ready(function() {
-                $('#datatable-fixed-header002').DataTable( {
+                $('#datatable-fixed-header003').DataTable( {
                     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
                 } );
             } );
-              function VV1()
+              function VV2()
               {
-                var table = document.getElementById('datatable-fixed-header002');
+                var table = document.getElementById('datatable-fixed-header003');
                 for(var counter = 1; counter < table.rows.length; counter++)
                 {
                   table.rows[counter].onclick = function()
                 {
-                  document.getElementById("soa_planID1").value = this.cells[0].innerHTML;
-                   document.getElementById("soa_rate1").value = this.cells[3].innerHTML;
-                   document.getElementById("soa_plan1").value = this.cells[1].innerHTML;
+                  document.getElementById("soa_planID").value = this.cells[0].innerHTML;
+                   document.getElementById("soa_rate").value = this.cells[3].innerHTML;
+                   document.getElementById("soa_plan").value = this.cells[1].innerHTML;
                     };
                   }
               }

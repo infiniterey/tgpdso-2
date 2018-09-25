@@ -124,10 +124,12 @@ overflow-y:auto;
 																	$result = $DB_con->query($sql);
 																	if($result->rowCount()>0){
 																		while($row=$result->fetch(PDO::FETCH_ASSOC)){
+																			$originalDate = $row['payment_transDate'];
+																			$payTransdate = date("m/d/Y", strtotime($originalDate));
 																			?>
 																			<tr>
 																				<td hidden><?php print($row['payment_ID']); ?></td>
-																				<td><?php print($row['payment_transDate']); ?></td>
+																				<td><?php print($payTransdate); ?></td>
 																				<td><?php print($row['cLastname'].",".$row['cFirstname']." ".$row['cMiddlename']);?></td>
 																				<td><?php print($row['payment_policyNo']); ?></td>
 																				<td><?php print($row['payment_MOP']); ?></td>
@@ -184,8 +186,9 @@ overflow-y:auto;
 														 document.getElementById("soa_agent1").value = this.cells[20].innerHTML;
 														 document.getElementById("soa_agentname1").value = this.cells[21].innerHTML;
 														 document.getElementById("soa_dueDate1").value = this.cells[22].innerHTML;
-														 document.getElementById("soa_ID").value = this.cells[23].innerHTML;
+														 document.getElementById("soa_ID1").value = this.cells[23].innerHTML;
 														 document.getElementById("soa_plan1").value = this.cells[24].innerHTML;
+														 document.getElementById("soa_planID1").value = this.cells[25].innerHTML;
 															};
 														}
 													</script>
@@ -212,7 +215,7 @@ overflow-y:auto;
 <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
 	<?php include 'PHPFile/button_updateSOA.php'; ?>
 </div>
-<div class="modal fade" name="addSOASearchPolicy" id="addSOASearchPolicy" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+<div class="modal fade" name="addSOASearchPolicy" id="addSOASearchPolicy" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
 	<?php include 'PHPFile/button_searchPolicy_addSOA.php'; ?>
 </div>
 <div class="modal fade" name="searchAgent" id="searchAgent" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
@@ -226,6 +229,9 @@ overflow-y:auto;
 </div>
 <div class="modal fade" tabindex="-1" role="dialog" id="planSearchSOA" name="planSearchSOA" data-keyboard="false" data-backdrop="static" style="margin-top: 30px;">
 	<?php include 'PHPFile/button_add_plan_SOA.php'; ?>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="planSearchAddSOA" name="planSearchAddSOA" data-keyboard="false" data-backdrop="static" style="margin-top: 30px;">
+	<?php include 'PHPFile/button_add_plan_AddSOA.php'; ?>
 </div>
 	<footer style="margin-bottom: -15px;">
 		<center>

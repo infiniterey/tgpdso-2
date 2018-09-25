@@ -121,6 +121,8 @@
                                     $result = $DB_con->query($sql);
                                     if($result->rowCount()>0){
                                       while($row=$result->fetch(PDO::FETCH_ASSOC)){
+																				$date1 = $row['payment_dueDate'];
+																				$dateR1 = date("m/d/Y", strtotime($date1));
                                         ?>
 																			  <tr>
 																					<td style="text-align:center; width: 200px;"><?php print($row['cLastname'].", ".$row['cFirstname']." ".$row['cMiddlename']);?></td>
@@ -128,7 +130,7 @@
                                           <td style="text-align:center; width: 10px;"><?php print($row['planCode']); ?></td>
 																					<td style="text-align:center; width: 20px;"><?php print($row['modeOfPayment']); ?></td>
 																					<td style="text-align:center; width: 20px;">Php&nbsp;<?php print($row['premium']); ?></td>
-																					<td style="text-align:center; width: 100px;"><?php print($row['payment_dueDate']); ?></td>
+																					<td style="text-align:center; width: 100px;"><?php echo $dateR1; ?></td>
 																					<td style="text-align:center; width: 30px;">
 																						<div class="row">
 																							<button type="button" style='float:center' class="btn btn-primary" data-target="#paymentModal" data-toggle="modal" name="duedatebutton" id="duedatebutton"><i class="glyphicon glyphicon-copy"></i></button>

@@ -11,11 +11,11 @@
           <div class="col-md-5">
           <label class="control-label">
           Policy No.:
-        </label><input type="text" class="form-control" name="soa_policyNo" id="soa_policyNo"/>
+        </label><input type="text" class="form-control" name="soa_policyNo" id="soa_policyNo" placeholder="Policy No.">
       </div>
 
     <div class="col-md-2">
-        <button type="button" class="btn btn-primary"name="soaSearch" id="soaSearch" data-dismiss="modal" data-toggle="modal" data-target="#addSOASearchPolicy" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
+        <button type="button" class="btn btn-primary"name="soaSearch" id="soaSearch" data-toggle="modal" data-target="#addSOASearchPolicy" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
       </div>
         </div>
         <div class="row">
@@ -32,7 +32,7 @@
             });
           </script>
           <script>
-             function commissionUpdateSOA()
+             function commissionAddSOA()
              {
                document.getElementById("soa_commission").value="";
                var premium = document.getElementById("soa_premium").value;
@@ -78,13 +78,13 @@
                 <hr>
                 <label class="control-label">
                 Transaction Date:
-              </label><input type="date" class="form-control" name="soa_transDate" id="soa_transDate"><br>
+              </label><input type="date" class="form-control" name="soa_transDate" id="soa_transDate" placeholder="Transaction Date"><br>
               <div class="row">
                 <div class="col-md-10">
               <label class="control-label">
                 Name:
               </label>
-                  <input  type="text" class="form-control" id="soa_client" name="soa_client">
+                  <input  type="text" class="form-control" id="soa_client" name="soa_client" placeholder="Client Name">
               </div>
               <div class="col-md-2">
                   <button type="button" name="searchClient" id="searchClient" class="btn btn-primary" data-target="#clientSearchSOA" data-toggle="modal" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
@@ -94,7 +94,7 @@
               <br>
                 <label class="control-label">
                 Issue Date:
-              </label><input type="date" class="form-control" name="soa_issueDate" id="soa_issueDate"><br>
+              </label><input type="date" class="form-control" name="soa_issueDate" id="soa_issueDate" placeholder="Issue Date"><br>
             </div>
             <div class="col-md-6" style="margin-top: -77px;">
               <label class="control-label">
@@ -111,27 +111,28 @@
             <br>
                 <label class="control-label">
                 Premium:
-              </label><input type="text" class="form-control number" name="soa_premium" id="soa_premium" onchange="commissionUpdateSOA()"><br>
+              </label><input type="text" class="form-control number" name="soa_premium" id="soa_premium" onchange="commissionAddSOA()" placeholder="Premium"><br>
 
               <div class="row">
                 <div class="col-md-10">
                 <label class="control-label">
                   Plan:
-                </label><input type="text" class="form-control number" name="soa_plan" id="soa_plan">
+                  <input type="text" name="soa_planID" id="soa_planID" hidden>
+                </label><input type="text" class="form-control number" name="soa_plan" id="soa_plan" placeholder="Plan">
               </div>
                 <div class="col-md-2">
-                <button style="margin-left: -14px; margin-top: 24px;" type="button" name="soa_planButton" id="soa_planButton" data-target="#planSearchSOA" data-toggle="modal" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <button style="margin-left: -14px; margin-top: 24px;" type="button" name="soa_planButton" id="soa_planButton" data-target="#planSearchAddSOA" data-toggle="modal" class="btn btn-primary"><i class="fa fa-search"></i></button>
               </div>
               </div>
               <br>
 
                 <label class="control-label">
                 Rate:
-              </label><input type="text" class="form-control" name="soa_rate" id="soa_rate"><br>
+              </label><input type="text" class="form-control" name="soa_rate" id="soa_rate" placeholder="Rate"><br>
               <div style="margin-top: -7px;">
                 <label class="control-label">
                 Commission:
-                </label><input type="text" class="form-control" name="soa_commission" id="soa_commission"><br>
+              </label><input type="text" class="form-control" name="soa_commission" id="soa_commission" placeholder="Commission"><br>
               </div>
 
             <div class="row">
@@ -140,16 +141,16 @@
             <label class="control-label">
             Agent:
           </label><input type="text" hidden name="soa_agent" id="soa_agent">
-          <input type="text" class="form-control" name="soa_agentname" id="soa_agentname">
+          <input type="text" class="form-control" name="soa_agentname" id="soa_agentname" placeholder="Agent">
             </div>
             <div class="col-md-2">
-              <button type="button" class="btn btn-primary"name="soaAgent" id="soaAgent" data-toggle="modal" data-target="#searchAgentUpdate" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
+              <button type="button" class="btn btn-primary"name="soaAgent" id="soaAgent" data-toggle="modal" data-target="#searchAgent" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
             </div>
           </div>
           <br>
           <label class="control-label">
           Due Date:
-        </label><input type="text" class="form-control" name="soa_dueDate" id="soa_dueDate">
+        </label><input type="date" class="form-control" name="soa_dueDate" id="soa_dueDate">
         <input type="text" hidden name="soa_ID" id="soa_ID">
 
                <br>
@@ -157,7 +158,7 @@
              </div>
               </div>
               <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" style="width: 100px;" name="soaUpdate" id="soaUpdate"><i class="fa fa-arrow-up"></i>&nbsp;&nbsp;Update</button>
+                <button type="submit" class="btn btn-primary" style="width: 100px;" name="soaSave" id="soaSave"><i class="fa fa-arrow-up"></i>&nbsp;&nbsp;Update</button>
               </div>
             </form>
           </div>

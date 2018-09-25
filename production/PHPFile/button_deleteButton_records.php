@@ -5,6 +5,47 @@ include 'PHPFile/Connection_Database.php';
       {
         die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
       }
+      else
+      {
+        if(isset($_GET['deletePayment']) && isset($_GET['list']))
+        {
+          $delete = $_GET['deletePayment'];
+          $list = $_GET['list'];
+          $one= "1";
+
+          $query= "SELECT * FROM payment WHERE payment_ID < $list ORDER BY payment_ID DESC LIMIT 1";
+          //$query = "SELECT * FROM payment WHERE payment_policyNo = (SELECT max(payment_ID) FROM payment WHERE payment_ID < '$list')";
+          $data = mysqli_query($conn, $query);
+          while($row = mysqli_fetch_Array($data))
+          {
+            $paymentID = $row['payment_ID'];
+          }
+          $result = mysqli_num_rows($data);
+          if($result == 1)
+          {
+            $sql = "UPDATE payment SET payment_latest = '$one' WHERE payment_ID = '$paymentID'";
+            if($conn->query($sql))
+            {
+
+            }
+            else
+            {
+              echo "Error:". $sql."<br>".$conn->error;
+            }
+          }
+          $conn->close();
+        }
+      }
+
+ ?>
+
+<?php
+include 'PHPFile/Connection_Database.php';
+
+      if(mysqli_connect_error())
+      {
+        die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
+      }
       else {
 			if(isset($_GET['deletePayment']) && isset($_GET['list']))
 			{
@@ -26,6 +67,7 @@ include 'PHPFile/Connection_Database.php';
 			}
     }
 ?>
+
 
 <?php
 include 'PHPFile/Connection_Database.php';
@@ -59,7 +101,6 @@ include 'PHPFile/Connection_Database.php';
             {
               ?>
               <script>
-                alert("Deleting the record successfully");
                 window.location = "records.php?edit=<?php echo $delete ?>";
                 </script>
                 <?php
@@ -76,7 +117,6 @@ include 'PHPFile/Connection_Database.php';
             {
               ?>
               <script>
-                alert("Deleting the record successfully");
                 window.location = "records.php?edit=<?php echo $delete ?>";
                 </script>
                 <?php

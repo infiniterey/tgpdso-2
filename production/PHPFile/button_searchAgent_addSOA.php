@@ -34,7 +34,7 @@
                       <td><?php print($row['agentLastname'].",".$row['agentFirstname']." ".$row['agentMiddlename']); ?></td>
                       <td align="center">
                         <div class="row">
-                          <button  class="btn btn-primary" name="buttonsearchAgent">Get&nbsp;<i class="fa fa-arrow-right"></i></a>
+                          <button  type="button" data-dismiss="modal" data-target="#searchAgent" class="btn btn-primary" name="buttonsearchAgent">Get&nbsp;<i class="fa fa-arrow-right"></i></a>
                         </div>
                       </td>
                     </tr>
@@ -57,7 +57,7 @@
                       <td><?php print($row['agentLastname'].",".$row['agentFirstname']." ".$row['agentMiddlename']); ?></td>
                       <td align="center">
                         <div class="row">
-                          <button  type="button" data-dismiss="modal" data-toggle="modal" data-target="#addSOAModal" class="btn btn-primary" name="buttonsearchAgent">Get&nbsp;<i class="fa fa-arrow-right"></i></a>
+                          <button  onclick="VB1();" type="button" data-dismiss="modal" data-target="#searchAgent" class="btn btn-primary" name="buttonsearchAgent">Get&nbsp;<i class="fa fa-arrow-right"></i></a>
                         </div>
                       </td>
                     </tr>
@@ -70,6 +70,7 @@
         </table>
 
         <script>
+        function VB1(){
         var table = document.getElementById('datatable-fixed-header09');
         for(var counter = 1; counter < table.rows.length; counter++)
         {
@@ -77,8 +78,10 @@
           {
            document.getElementById("soa_agent").value = this.cells[0].innerHTML;
            document.getElementById("soa_agentname").value = this.cells[1].innerHTML;
-            };
-          }
+         };
+        }
+        return false;
+        }
         </script>
 
       </div>

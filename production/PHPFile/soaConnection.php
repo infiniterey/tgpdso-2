@@ -115,7 +115,7 @@ else
 		{
 				$edit = $_REQUEST['edit'];
 
-					$sql=mysqli_query($conn,"SELECT * from production, payment, client, agents WHERE policyNo = payment_policyNo AND agentCode = agent AND clientID = prodclientID AND policyNo = '$edit'");
+					$sql=mysqli_query($conn,"SELECT * from production, payment, client, agents, plans WHERE planID = plan AND policyNo = payment_policyNo AND agentCode = agent AND clientID = prodclientID AND policyNo = '$edit'");
 
 
 					while($row=mysqli_fetch_Array($sql))
@@ -133,14 +133,15 @@ else
             <script> document.getElementById('soa_agent').value = '<?php echo $row['agentCode'];?>';</script>
             <script> document.getElementById('soa_agentname').value = '<?php echo $row['agentLastname'].", ".$row['agentFirstname']." ".$row['agentMiddlename']?>';</script>
             <script> document.getElementById('soa_dueDate').value = '<?php echo $row['payment_dueDate'];?>';</script>
+            <script> document.getElementById('soa_plan').value = '<?php echo $row['planCode'];?>';</script>
+            <script> document.getElementById('soa_planID').value = '<?php echo $row['planID'];?>';</script>
 					<?php
 				}
         ?>
-          <script>        $(document).ready(function () {
-
-                          $('#addSOAModal').modal('show');
-
-                      });</script>
+          <script>
+          $(document).ready(function () {
+            $('#addSOAModal').modal('show');
+          });</script>
         <?php
 				$conn->close();
 	}
@@ -157,6 +158,7 @@ include 'PHPFile/Connection_Database.php';
       else {
 				if(isset($_POST['soaSave']))
 				{
+          $soaPlan = $_POST['soa_planID'];
           $soaDate = $_POST['soa_date'];
           $soaPolicyNo = $_POST['soa_policyNo'];
           $soaTransDate = $_POST['soa_transDate'];
@@ -171,16 +173,15 @@ include 'PHPFile/Connection_Database.php';
           $soadueDate = $_POST['soa_dueDate'];
 
 
-					$sql = "INSERT INTO soa (SOA_transDate, SOA_policyOwner, SOA_policyNo, SOA_paymentMode, SOA_premium, SOA_rate, SOA_commission,
+					$sql = "INSERT INTO soa (SOA_plan, SOA_transDate, SOA_policyOwner, SOA_policyNo, SOA_paymentMode, SOA_premium, SOA_rate, SOA_commission,
           SOA_agent, SOA_date, SOA_selectMonth, SOA_dueDate)
-					values ('$soaTransDate', '$soaName', '$soaPolicyNo', '$soaMOP', '$soaPremium', '$soaRate','$soaCommission', '$soaAgent', '$soaDate', '$soaSelectMonth', '$soadueDate')";
+					values ('$soaPlan', '$soaTransDate', '$soaName', '$soaPolicyNo', '$soaMOP', '$soaPremium', '$soaRate','$soaCommission', '$soaAgent', '$soaDate', '$soaSelectMonth', '$soadueDate')";
 
 						if($conn->query($sql))
 						{
 							?>
 							<script>
-								alert("New record production successfully added");
-
+                window.location="soa.php";
 							</script>
 								<?php
 						}
@@ -213,7 +214,7 @@ include 'PHPFile/Connection_Database.php';
 						{
 							?>
 							<script>
-                window.location="soa.php?edit=<?php echo $soaPolicyNo ?>"
+                window.location="soa.php";
 							</script>
 								<?php
 						}
@@ -265,7 +266,6 @@ include 'PHPFile/Connection_Database.php';
 						{
 							?>
 							<script>
-								alert("New record production successfully added");
                 window.location="soa.php?edit=<?php echo $soaPolicyNo ?>"
 							</script>
 								<?php
