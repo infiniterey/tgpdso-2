@@ -74,8 +74,8 @@ overflow-y:auto;
 												<div class="col-sm-12">
 
 				<!-- table-striped dataTable-->
-
-													<table id="datatable-fixed-header10" name="datatable-fixed-header10" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
+												<div id="tableFront" name="tableFront">
+													<table id="datatable-fixed-header12" name="datatable-fixed-header10" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
 														<thead>
 															<tr role="row">
 																<th hidden>SOAID</th>
@@ -102,6 +102,9 @@ overflow-y:auto;
 																<th hidden></th>
 																<th hidden></th>
 																<th hidden></th>
+																<th hidden></th>
+																<th hidden></th>
+
 															</tr>
 														</thead>
 
@@ -167,7 +170,65 @@ overflow-y:auto;
 																?>
 															</tbody>
 													</table>
+												</div>
+												<div hidden id="tableView" name="tableView">
+													<table id="datatable-fixed-header11" name="datatable-fixed-header10" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
+														<thead>
+															<tr role="row">
+																<th hidden>SOAID</th>
+																<th class="sorting_asc" tabindex="0" aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-sort="ascending" aria-label="TransactionDate" style="width: 25px;text-align:center;">Transaction Date</th>
+																<th class="sorting" tabindex="0" aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="PolicyOwner" style="width: 500px;text-align:center;">Policy Owner</th>
+																<th class="sorting" tabindex="0"  aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="PolicyNo" style="width: 50px;text-align:center;">Policy No.</th>
+																<th class="sorting" tabindex="0"  aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="PaymentMode" style="width: 20px;text-align:center;">M.O.P</th>
+																<th class="sorting" tabindex="0"  aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="Premium" style="width: 20px;text-align:center;">Premium</th>
+																<th class="sorting" tabindex="0"  aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="Rate" style="width: 10px;text-align:center;">Rate</th>
+																<th class="sorting" tabindex="0"  aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="Commission" style="width: 40px;text-align:center;">Commission</th>
+																<th class="sorting" tabindex="0"  aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="Agent" style="width: 50px;text-align:center;">Agent</th>
+																<th class="sorting" tabindex="0"  aria-controls="datatable-fixed-header" rowspan="1" colspan="1" aria-label="Action" style="width: 50px;text-align:center;">SOA Date</th>
+															</tr>
+														</thead>
 
+														<tbody>
+
+																<?php
+
+																	$DB_con = Database::connect();
+																	$DB_con->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+																	$teamItSelf = $_SESSION["team"];
+																	$userTypeItSelf = $_SESSION["usertype"];
+																	if($_SESSION["usertype"] == "Secretary" || $_SESSION["usertype"] == "secretary")
+																	{
+																		$sql = "SELECT * FROM production, payment, agents, client, team, plans, soa WHERE SOA_policyNo = policyNo AND planID = plan AND agentCode = agent AND agentTeam = teamID AND teamName = '$teamItSelf' AND payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
+																	}
+																	else
+																	{
+																		$sql = "SELECT * FROM production, payment, agents, client, plans, soa WHERE planID = plan AND SOA_policyNo = policyNo AND payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
+																	}
+																	$result = $DB_con->query($sql);
+																	if($result->rowCount()>0){
+																		while($row=$result->fetch(PDO::FETCH_ASSOC)){
+																			$originalDate = $row['SOA_transDate'];
+																			$payTransdate = date("m/d/Y", strtotime($originalDate));
+																			?>
+																			<tr>
+																				<td hidden><?php print($row['SOA_ID']); ?></td>
+																				<td><?php print($payTransdate); ?></td>
+																				<td><?php print($row['cLastname'].",".$row['cFirstname']." ".$row['cMiddlename']);?></td>
+																				<td><?php print($row['SOA_policyNo']); ?></td>
+																				<td><?php print($row['SOA_paymentMode']); ?></td>
+																				<td>Php&nbsp;<?php print($row['SOA_premium']); ?></td>
+																				<td><?php print($row['SOA_rate']); ?></td>
+																				<td>Php&nbsp;<?php print($row['SOA_commission']); ?></td>
+																				<td><?php print($row['agentLastname'].",".$row['agentFirstname']." ".$row['agentMiddlename']); ?></td>
+																				<td><?php print($row['SOA_date']." (".$row['SOA_selectMonth'].")");?></td>
+																			</tr>
+																			<?php
+																		}
+																	}
+																?>
+															</tbody>
+													</table>
+												</div>
 													<script>
 													var table = document.getElementById('datatable-fixed-header10');
 													for(var counter = 1; counter < table.rows.length; counter++)

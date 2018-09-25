@@ -83,7 +83,7 @@ include 'PHPFile/Connection_Database.php';
           $sql = "UPDATE payment SET payment_latest = '$zero' WHERE payment_policyNo = '$add'";
           if($conn->query($sql))
           {
-            
+
           }
           else {
             echo "Error:". $sql."<br>".$conn->error;
@@ -113,6 +113,7 @@ include 'PHPFile/Connection_Database.php';
           $paymentDueDate = $_POST['paymentNextDueADD'];
           $paymentNextDue = $_POST['paymentNextDue'];
           $paymentRemarks = "New";
+          //$nextDueResulter = $_POST['dateText'];
 
           $add = $_POST['paymentPolicyNo'];
           //$query = "SELECT * FROM payment, production WHERE payment_nextDue = dueDate AND payment_policyNo = policyNo AND policyNo = '$add' ORDER BY DESC
@@ -278,18 +279,6 @@ include 'PHPFile/Connection_Database.php';
 
                 document.getElementById("dateText").value = newdateResult;
                 var valueData = document.getElementById("dateText").value;
-
-                //window.location="records.php?getDateThis="+valueData+"";
-                // function post()
-                // {
-                //   var dataDate = newdateResult;
-                //   $.post('records.php', {webdate:dataDate},
-                //   function(data)
-                //   {
-                //     $('#dateText').html(data);
-                //   });
-                // }
-
               </script>
               <?php
                 $nextDueResulter = $_POST['paymentNextDue'];

@@ -21,6 +21,7 @@ $(document).ready(function() {
     } );
 } );
 
+
 </script>
 
 <script>
@@ -34,11 +35,19 @@ $(document).ready(function() {
 				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
 		} );
 } );
+
 $(document).ready(function() {
-		$('#datatable-fixed-header10').DataTable( {
+		$('#datatable-fixed-header11').DataTable( {
 				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
 		} );
 } );
+$(document).ready(function() {
+		$('#datatable-fixed-header12').DataTable( {
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
+		} );
+} );
+
+
 
   $(document).ready(function() {
       $('#datatable-fixed-header001').DataTable( {
@@ -50,9 +59,11 @@ function viewCheckbox() {
   var checkBox = document.getElementById("soaCheckBox");
   var text = document.getElementById("text");
   if (checkBox.checked == true){
-    alert('Viewing the SOA is still working');
+    document.getElementById('tableFront').style.display = "none";
+    document.getElementById('tableView').style.display = "block";
   } else {
-
+    document.getElementById('tableFront').style.display = "block";
+    document.getElementById('tableView').style.display = "none";
   }
 
 }
