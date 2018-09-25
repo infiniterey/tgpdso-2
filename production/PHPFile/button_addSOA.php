@@ -111,14 +111,22 @@
             <br>
                 <label class="control-label">
                 Premium:
+<<<<<<< HEAD
               </label><input type="text" class="form-control number" name="soa_premium" id="soa_premium" onchange="commissionAddSOA()" placeholder="Premium"><br>
+=======
+              </label><input type="text" class="form-control number" name="soa_premium" id="soa_premium" onchange="commissionAddSOA()"><br>
+>>>>>>> 65c7fd386c031917ac8b79a767bd8bc48ccc5631
 
               <div class="row">
                 <div class="col-md-10">
                 <label class="control-label">
                   Plan:
                   <input type="text" name="soa_planID" id="soa_planID" hidden>
+<<<<<<< HEAD
                 </label><input type="text" class="form-control number" name="soa_plan" id="soa_plan" placeholder="Plan">
+=======
+                </label><input type="text" class="form-control number" name="soa_plan" id="soa_plan">
+>>>>>>> 65c7fd386c031917ac8b79a767bd8bc48ccc5631
               </div>
                 <div class="col-md-2">
                 <button style="margin-left: -14px; margin-top: 24px;" type="button" name="soa_planButton" id="soa_planButton" data-target="#planSearchAddSOA" data-toggle="modal" class="btn btn-primary"><i class="fa fa-search"></i></button>

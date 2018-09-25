@@ -54,6 +54,7 @@
             } );
               function VV1()
               {
+<<<<<<< HEAD
                 var table = document.getElementById('datatable-fixed-header002');
                 for(var counter = 1; counter < table.rows.length; counter++)
                 {
@@ -65,6 +66,16 @@
                     };
                   }
               }
+=======
+                table.rows[counter].onclick = function()
+              {
+                document.getElementById("soa_planID1").value = this.cells[0].innerHTML;
+                 document.getElementById("soa_rate1").value = this.cells[3].innerHTML;
+                 document.getElementById("soa_plan1").value = this.cells[1].innerHTML;
+                  };
+                }
+
+>>>>>>> 65c7fd386c031917ac8b79a767bd8bc48ccc5631
             </script>
         </div>
         <div class="modal-footer">

@@ -119,7 +119,11 @@
         <label class="control-label">
           Plan:
         </label>
+<<<<<<< HEAD
         <input id="soa_planID1" name="soa_planID1" type="text" hidden>
+=======
+        <input id="soa_planID1" name="soa_planID1" type="text">
+>>>>>>> 65c7fd386c031917ac8b79a767bd8bc48ccc5631
         <input type="text" class="form-control number" name="soa_plan1" id="soa_plan1">
       </div>
         <div class="col-md-2">
