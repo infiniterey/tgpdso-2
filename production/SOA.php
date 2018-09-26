@@ -59,9 +59,11 @@ overflow-y:auto;
 
 										<div class="clearfix"></div>
 									</div>
+
 										<div class="col-md-12 col-sm-12 col-xs-12">
 											<div class="row">
 												<div>
+													<input type="checkbox" name="soaCheckBox" id="soaCheckBox" onclick="viewCheckbox();" style="margin-top: 10px; margin-left: 20px;">&nbsp;View all SOA history
 													<!--<h2><input type="text" name="searchT" id="searchT" placeholder="Policy No."></input>-->
 													<!--<button type="button" name="buttonshowall" id="buttonshowall" class="fa fa-search btn btn-success" data-toggle="modal" data-target="#myModal" style="margin-bottom: -1px;" id="myBtn"></button></h2>-->
 													<button  type="button" style='float:right' data-toggle="modal" data-target="#addSOAModal" class="btn btn-primary" name="searchPolicy" id="searchPolicy"><i class="fa fa-plus" hidden></i>&nbsp;&nbsp;Add SOA</button>
@@ -69,12 +71,12 @@ overflow-y:auto;
 													<div class="clearfix"></div>
 												</div>
 											</div>
-											<input type="checkbox" name="soaCheckBox" id="soaCheckBox" onclick="viewCheckbox();">&nbsp;View all SOA history
+
 											<br><br>
 												<div class="col-sm-12">
 
 				<!-- table-striped dataTable-->
-												<div id="tableFront" name="tableFront">
+												<div id="tableFront" name="tableFront" style="margin-top: -10px;">
 													<table id="datatable-fixed-header12" name="datatable-fixed-header10" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
 														<thead>
 															<tr role="row">
@@ -170,9 +172,33 @@ overflow-y:auto;
 																?>
 															</tbody>
 													</table>
+													<script>
+													var table = document.getElementById('datatable-fixed-header12');
+													for(var counter = 1; counter < table.rows.length; counter++)
+													{
+														table.rows[counter].onclick = function()
+														{
+														 document.getElementById("soa_policyNo1").value = this.cells[10].innerHTML;
+														 document.getElementById("soa_transDate1").value = this.cells[12].innerHTML;
+														 document.getElementById("soa_name1").value = this.cells[13].innerHTML;
+														 document.getElementById("soa_client1").value = this.cells[14].innerHTML;
+														 document.getElementById("soa_issueDate1").value = this.cells[15].innerHTML;
+														 document.getElementById("soaMOP1").value = this.cells[16].innerHTML;
+														 document.getElementById("soa_premium1").value = this.cells[17].innerHTML;
+														 document.getElementById("soa_rate1").value = this.cells[18].innerHTML;
+														 document.getElementById("soa_commission1").value = this.cells[19].innerHTML;
+														 document.getElementById("soa_agent1").value = this.cells[20].innerHTML;
+														 document.getElementById("soa_agentname1").value = this.cells[21].innerHTML;
+														 document.getElementById("soa_dueDate1").value = this.cells[22].innerHTML;
+														 document.getElementById("soa_ID1").value = this.cells[23].innerHTML;
+														 document.getElementById("soa_plan1").value = this.cells[24].innerHTML;
+														 document.getElementById("soa_planID1").value = this.cells[25].innerHTML;
+															};
+														}
+													</script>
 												</div>
 												<div hidden id="tableView" name="tableView">
-													<table id="datatable-fixed-header11" name="datatable-fixed-header10" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
+													<table id="datatable-fixed-header11" name="datatable-fixed-header11" class="table table-bordered table-hover no-footer" role="grid" aria-describedby="datatable-fixed-header_info">
 														<thead>
 															<tr role="row">
 																<th hidden>SOAID</th>
@@ -198,11 +224,11 @@ overflow-y:auto;
 																	$userTypeItSelf = $_SESSION["usertype"];
 																	if($_SESSION["usertype"] == "Secretary" || $_SESSION["usertype"] == "secretary")
 																	{
-																		$sql = "SELECT * FROM production, payment, agents, client, team, plans, soa WHERE SOA_policyNo = policyNo AND planID = plan AND agentCode = agent AND agentTeam = teamID AND teamName = '$teamItSelf' AND payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
+																		$sql = "SELECT * FROM production, agents, client, team, soa WHERE SOA_policyNo = policyNo AND agentCode = agent AND agentTeam = teamID AND teamName = '$teamItSelf' AND agent = agentCode AND clientID = prodclientID";
 																	}
 																	else
 																	{
-																		$sql = "SELECT * FROM production, payment, agents, client, plans, soa WHERE planID = plan AND SOA_policyNo = policyNo AND payment_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID AND (payment_soaDate IS NULL OR payment_soaDate LIKE '')";
+																		$sql = "SELECT * FROM production, agents, client, soa WHERE SOA_policyNo = policyNo AND agent = agentCode AND clientID = prodclientID";
 																	}
 																	$result = $DB_con->query($sql);
 																	if($result->rowCount()>0){
@@ -229,31 +255,6 @@ overflow-y:auto;
 															</tbody>
 													</table>
 												</div>
-													<script>
-													var table = document.getElementById('datatable-fixed-header10');
-													for(var counter = 1; counter < table.rows.length; counter++)
-													{
-														table.rows[counter].onclick = function()
-														{
-														 document.getElementById("soa_policyNo1").value = this.cells[10].innerHTML;
-														 document.getElementById("soa_transDate1").value = this.cells[12].innerHTML;
-														 document.getElementById("soa_name1").value = this.cells[13].innerHTML;
-														 document.getElementById("soa_client1").value = this.cells[14].innerHTML;
-														 document.getElementById("soa_issueDate1").value = this.cells[15].innerHTML;
-														 document.getElementById("soaMOP1").value = this.cells[16].innerHTML;
-														 document.getElementById("soa_premium1").value = this.cells[17].innerHTML;
-														 document.getElementById("soa_rate1").value = this.cells[18].innerHTML;
-														 document.getElementById("soa_commission1").value = this.cells[19].innerHTML;
-														 document.getElementById("soa_agent1").value = this.cells[20].innerHTML;
-														 document.getElementById("soa_agentname1").value = this.cells[21].innerHTML;
-														 document.getElementById("soa_dueDate1").value = this.cells[22].innerHTML;
-														 document.getElementById("soa_ID1").value = this.cells[23].innerHTML;
-														 document.getElementById("soa_plan1").value = this.cells[24].innerHTML;
-														 document.getElementById("soa_planID1").value = this.cells[25].innerHTML;
-															};
-														}
-													</script>
-
 											</div>
 										</div>
 									</div>
@@ -286,6 +287,9 @@ overflow-y:auto;
 	<?php include 'PHPFile/button_searchAgent_updateSOA.php'; ?>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog" id="clientSearchSOA" name="clientSearchSOA" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
+	<?php include 'PHPFile/button_searchClient_updateSOA.php'; ?>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="clientSearchAddSOA" name="clientSearchAddSOA" data-keyboard="false" data-backdrop="static" style="margin-top: 20px;">
 	<?php include 'PHPFile/button_searchClient_updateSOA.php'; ?>
 </div>
 <div class="modal fade" tabindex="-1" role="dialog" id="planSearchSOA" name="planSearchSOA" data-keyboard="false" data-backdrop="static" style="margin-top: 30px;">

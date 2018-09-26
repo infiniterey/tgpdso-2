@@ -7,6 +7,117 @@ if(mysqli_connect_error())
 }
 else
 {
+	if(isset($_REQUEST['saveThisFund']))
+	{
+		$add = $_REQUEST['edit'];
+		$fundID = $_REQUEST['setFundID'];
+		$rate = $_REQUEST['setFundRate'];
+		$number = $_REQUEST['addText'];
+
+		$add = $_REQUEST['edit'];
+		$fundIdentify = $_REQUEST['fund'];
+		$rateIdentify = $_REQUEST['rate'];
+
+		$totalRate = $rate + $number;
+
+		$query = "SELECT * FROM policyFund WHERE polFund_policyNo = '$add' AND polFund_fund = '$fundIdentify' AND polFund_rate = '$rateIdentify'";
+		$data = mysqli_query($conn, $query);
+		$result = mysqli_num_rows($data);
+			if($result == 1)
+			{
+				if($rate > "100")
+				{
+					?>
+					<script>
+						alert('Does not accept the rate that less than the value given');
+						window.location="records.php?edit=<?php echo $add ?>&#fundModal";
+					</script>
+					<?php
+					return;
+				}
+				if($totalRate > "100")
+				{
+					?>
+					<script>
+						alert('Greater than maximum rate cannot be not accept');
+						window.location="records.php?edit=<?php echo $add ?>&#fundModal";
+					</script>
+					<?php
+					return;
+				}
+				$sql = "UPDATE policyFund SET polFund_policyNo = '$add', polFund_fund = '$fundID', polFund_rate = '$rate' WHERE polFund_policyNo = '$add' AND polFund_fund = '$fundIdentify'";
+
+				if($conn->query($sql))
+				{
+					?>
+					<script>
+						alert("Update plan successfully added");
+						window.location="records.php?edit=<?php echo $add ?>&#fundModal";
+					</script>
+						<?php
+				}
+				else
+				{
+					echo "Error:". $sql."<br>".$conn->error;
+				}
+				$conn->close();
+			}
+			else if($result == 0)
+			{
+				if($rate > "100")
+				{
+					?>
+					<script>
+						alert('Does not accept the rate that less than the value given');
+						window.location="records.php?edit=<?php echo $add ?>&#fundModal";
+					</script>
+					<?php
+					return;
+				}
+				if($totalRate > "100")
+				{
+					?>
+					<script>
+						alert('Greater than maximum rate cannot be not accept');
+						window.location="records.php?edit=<?php echo $add ?>&#fundModal";
+					</script>
+					<?php
+					return;
+				}
+
+				$sql = "INSERT INTO policyFund (polFund_policyNo, polFund_fund, polFund_rate)
+				values ('$add','$fundID','$rate')";
+				echo "<meta http-equiv='refresh' content='0'>";
+
+					if($conn->query($sql))
+					{
+						?>
+						<script>
+							alert("New plan successfully added");
+							window.location="records.php?edit=<?php echo $add ?>&#fundModal";
+						</script>
+							<?php
+					}
+					else
+					{
+						echo "Error:". $sql."<br>".$conn->error;
+					}
+					$conn->close();
+			}
+	}
+}
+
+?>
+
+<?php
+include 'PHPFile/Connection_Database.php';
+
+if(mysqli_connect_error())
+{
+	die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
+}
+else
+{
 		if(isset($_GET['fund']) && isset($_GET['rate']))
 		{
 				$fund = $_GET['fund'];
@@ -24,55 +135,12 @@ else
 						</script>
 					<?php
 					}
-				$conn->close();
-		}
-		else if(isset($_REQUEST['saveThisFund']))
-		{
-			$add = $_REQUEST['edit'];
-			$fundID = $_REQUEST['setFundID'];
-			$rate = $_REQUEST['setFundRate'];
-			$number = $_REQUEST['addText'];
-
-			$totalRate = $rate + $number;
-
-			if($rate > "100")
-			{
-				?>
-				<script>
-					alert('Does not accept the rate that less than the value given');
-					window.location="records.php?edit=<?php echo $add ?>&#fundModal";
-				</script>
-				<?php
-				return;
-			}
-			if($totalRate > "100")
-			{
-				?>
-				<script>
-					alert('Greater than maximum rate cannot be not accept');
-					window.location="records.php?edit=<?php echo $add ?>&#fundModal";
-				</script>
-				<?php
-				return;
-			}
-
-			$sql = "INSERT INTO policyFund (polFund_policyNo, polFund_fund, polFund_rate)
-			values ('$add','$fundID','$rate')";
-			echo "<meta http-equiv='refresh' content='0'>";
-
-				if($conn->query($sql))
-				{
 					?>
 					<script>
-						alert("New record production successfully added");
-						window.location="records.php?edit=<?php echo $add ?>&#fundModal";
-					</script>
-						<?php
-				}
-				else
-				{
-					echo "Error:". $sql."<br>".$conn->error;
-				}
+					$(document).ready(function () {
+						$('#fundModal').modal('show');
+					});</script>
+					<?php
 				$conn->close();
 		}
 		else if(isset($_GET['deleteFund']) && isset($_GET['fund']))

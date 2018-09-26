@@ -4,6 +4,7 @@
 <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <head>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	<style>
 		table tr:not(:first-child){
 			cursor:pointer;transition: all .25s	ease-in-out;
@@ -101,6 +102,7 @@
 																	<th hidden></th>
 																	<th hidden></th>
 																	<th hidden></th>
+																	<th hidden></th>
                               </thead>
 
                               <tbody>
@@ -144,8 +146,7 @@
 																					<td hidden><?php echo $row['payment_OR'] ?></td>
 																					<td hidden><?php echo $row['payment_APR'] ?></td>
 																					<td hidden><?php echo $row['payment_nextDue'] ?></td>
-
-
+																					<td hidden><?php echo $row['payment_dueDate'] ?></td>
 																					  </tr>
                                         <?php
                                       }
@@ -172,7 +173,7 @@
 																      	document.getElementById('paymentAPR').value = this.cells[13].innerHTML;
 																	    	//document.getElementById('paymentNextDue').value = this.cells[14].innerHTML;
 																				document.getElementById('paymentNextDueADD').value = this.cells[14].innerHTML;
-																				document.getElementById('paymentDueDate').value = this.cells[5].innerHTML;
+																				document.getElementById('paymentDueDate').value = this.cells[15].innerHTML;
 																			};
 																}
 														</script>

@@ -87,7 +87,7 @@
                   <input  type="text" class="form-control" id="soa_client" name="soa_client" placeholder="Client Name">
               </div>
               <div class="col-md-2">
-                  <button type="button" name="searchClient" id="searchClient" class="btn btn-primary" data-target="#clientSearchSOA" data-toggle="modal" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
+                  <button type="button" name="searchClient" id="searchClient" class="btn btn-primary" data-target="#clientSearchAddSOA" data-toggle="modal" style="margin-top: 24px; margin-left: -14px;"><i class="fa fa-search"></i></button>
               <input  type="text" id="soa_name" name="soa_name" hidden>
             </div>
               </div>
@@ -102,7 +102,7 @@
             </label>
             <select id="soaMOP" name="soaMOP" class="form-control">
             <option id="soaMOP" name="soaMOP">Select MOP</option>
-            <option id="soaMOP" name="soaMOP" value="Monthly">Montly</option>
+            <option id="soaMOP" name="soaMOP" value="Monthly">Monthly</option>
             <option id="soaMOP" name="soaMOP" value="Quarterly">Quarterly</option>
             <option id="soaMOP" name="soaMOP" value="Semi-Annual">Semi-Annual</option>
             <option id="soaMOP" name="soaMOP" value="Annual">Annual</option>
@@ -111,22 +111,13 @@
             <br>
                 <label class="control-label">
                 Premium:
-<<<<<<< HEAD
               </label><input type="text" class="form-control number" name="soa_premium" id="soa_premium" onchange="commissionAddSOA()" placeholder="Premium"><br>
-=======
-              </label><input type="text" class="form-control number" name="soa_premium" id="soa_premium" onchange="commissionAddSOA()"><br>
->>>>>>> 65c7fd386c031917ac8b79a767bd8bc48ccc5631
-
               <div class="row">
                 <div class="col-md-10">
                 <label class="control-label">
                   Plan:
                   <input type="text" name="soa_planID" id="soa_planID" hidden>
-<<<<<<< HEAD
                 </label><input type="text" class="form-control number" name="soa_plan" id="soa_plan" placeholder="Plan">
-=======
-                </label><input type="text" class="form-control number" name="soa_plan" id="soa_plan">
->>>>>>> 65c7fd386c031917ac8b79a767bd8bc48ccc5631
               </div>
                 <div class="col-md-2">
                 <button style="margin-left: -14px; margin-top: 24px;" type="button" name="soa_planButton" id="soa_planButton" data-target="#planSearchAddSOA" data-toggle="modal" class="btn btn-primary"><i class="fa fa-search"></i></button>
@@ -160,7 +151,6 @@
           Due Date:
         </label><input type="date" class="form-control" name="soa_dueDate" id="soa_dueDate">
         <input type="text" hidden name="soa_ID" id="soa_ID">
-
                <br>
              </div>
              </div>

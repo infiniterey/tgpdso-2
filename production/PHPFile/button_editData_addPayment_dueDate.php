@@ -11,7 +11,7 @@
         <label class="control-label">
         Policy #:
         </label>
-       <input type="text" readonly="readonly" class="form-control aswidth" name="paymentPolicyNo" id="paymentPolicyNo">
+       <input type="text" readonly="readonly" class="form-control aswidth pressingKey" name="paymentPolicyNo" id="paymentPolicyNo">
        <br>
         <label class="control-label">
         Issue Date:
@@ -31,7 +31,7 @@
       <label class="control-label">
       Amount:
       </label>
-      <input  type="text" class="form-control aswidth" id="paymentAmount" name="paymentAmount">
+      <input  type="text" class="form-control aswidth pressingKey" id="paymentAmount" name="paymentAmount">
       </div>
       <div class="col-sm-6">
         <label class="control-label">
@@ -39,10 +39,10 @@
       </label><input type="date" class="form-control aswidth" name="paymentTransDate" id="paymentTransDate"><br>
         <label class="control-label">
         OR #:
-      </label><input type="text" class="form-control aswidth" name="paymentORNo" id="paymentORNo"><br>
+      </label><input type="text" class="form-control aswidth pressingKey" name="paymentORNo" id="paymentORNo"><br>
         <label class="control-label">
         APR #:
-      </label><input type="text" class="form-control aswidth" name="paymentAPR" id="paymentAPR"><br>
+      </label><input type="text" class="form-control aswidth pressingKey" name="paymentAPR" id="paymentAPR"><br>
         <label class="control-label">
         Due Date:
       </label>
@@ -369,5 +369,25 @@ document.getElementById("paymentSaveButton").addEventListener("click", function(
     alert("Choose first the Mode of Payment");
   }
 });
+
+$(document).ready(function(){
+    $('#paymentSaveButton').attr('disabled',true);
+    $('input.pressingKey').keyup(function(){
+        if($(this).val().length !=0)
+            $('#paymentSaveButton').attr('disabled', false);
+        else
+            $('#paymentSaveButton').attr('disabled',true);
+    })
+
+    $('#paymentmodeOfPayment').change(function() {
+    var option = $(this).val();
+    if(option !='') {
+        $('#paymentSaveButton').attr('disabled', false);
+    } else {
+        $('#paymentSaveButton').attr('disabled',true);
+    }
+    });
+});
+
 
 </script>

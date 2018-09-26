@@ -47,6 +47,11 @@ $(document).ready(function() {
 		} );
 } );
 
+$(document).ready(function() {
+    $('#datatable-fixed-header81').DataTable( {
+        "lengthMenu": [[5, 25, 50, -1], [10, 25, 50, "All"]]
+    } );
+} );
 
 
   $(document).ready(function() {

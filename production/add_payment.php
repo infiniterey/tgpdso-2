@@ -11,17 +11,17 @@
         <label class="control-label">
         Policy #:
         </label>
-       <input type="text" readonly="readonly" class="form-control aswidth" name="paymentPolicyNo" id="paymentPolicyNo" placeholder="Policy #">
+       <input type="text" readonly="readonly" class="form-control aswidth pressingKey" name="paymentPolicyNo" id="paymentPolicyNo" placeholder="Policy #">
        <br>
         <label class="control-label">
         Issue Date:
-      </label><input type="date" class="form-control aswidth" name="paymentIssueDate" id="paymentIssueDate" readonly placeholder="Issue Date">
+      </label><input type="date" class="form-control aswidth pressingKey" name="paymentIssueDate" id="paymentIssueDate" readonly placeholder="Issue Date">
       <br>
       <label class="control-label">
       Mode of Payment:
     </label>
       <select name="paymentmodeOfPayment" id="paymentmodeOfPayment" class="form-control aswidth" required>
-      <option value = "" name="paymentmodeOfPayment" id="paymentmodeOfPayment">Select a MOP</option>
+      <option value = "na" name="paymentmodeOfPayment" id="paymentmodeOfPayment">Select a MOP</option>
       <option value="Monthly" name="paymentmodeOfPayment" id="paymentmodeOfPayment">Monthly</option>
       <option value="Quarterly" name="paymentmodeOfPayment" id="paymentmodeOfPayment">Quarterly</option>
       <option value="Semi-Annual" name="paymentmodeOfPayment" id="paymentmodeOfPayment">Semi-Annual</option>
@@ -31,22 +31,22 @@
       <label class="control-label">
       Amount:
       </label>
-      <input  type="text" class="form-control aswidth number" id="paymentAmount" name="paymentAmount" placeholder="Amount">
+      <input  type="text" class="form-control aswidth number pressingKey" id="paymentAmount" name="paymentAmount" placeholder="Amount">
       </div>
       <div class="col-sm-6">
         <label class="control-label">
         Transaction Date:
-      </label><input type="date" class="form-control aswidth" name="paymentTransDate" id="paymentTransDate" placeholder="Transaction Date"><br>
+      </label><input type="date" class="form-control aswidth pressingKey" name="paymentTransDate" id="paymentTransDate" placeholder="Transaction Date"><br>
         <label class="control-label">
         OR #:
-      </label><input type="text" class="form-control aswidth" name="paymentORNo" id="paymentORNo" placeholder="OR #"><br>
+      </label><input type="text" class="form-control aswidth pressingKey" name="paymentORNo" id="paymentORNo" placeholder="OR #"><br>
         <label class="control-label">
         APR #:
-      </label><input type="text" class="form-control aswidth" name="paymentAPR" id="paymentAPR" placeholder="APR #"><br>
+      </label><input type="text" class="form-control aswidth pressingKey" name="paymentAPR" id="paymentAPR" placeholder="APR #"><br>
         <label class="control-label">
         Due Date:
       </label>
-      <input type="date" class="form-control aswidth" name="paymentDueDate" id="paymentDueDate" readonly placeholder="Due Date">
+      <input type="date" class="form-control aswidth pressingKey" name="paymentDueDate" id="paymentDueDate" readonly placeholder="Due Date">
       <input type="date" name="paymentNextDue" id="paymentNextDue" hidden>
       <input type="date" name="paymentNextDueADD" id="paymentNextDueADD" hidden>
       <input type="date" name="dateText" id="dateText" hidden>
@@ -375,5 +375,25 @@ document.getElementById("paymentSaveButton").addEventListener("click", function(
     alert("Choose first the Mode of Payment");
   }
 });
+
+$(document).ready(function(){
+    $('#paymentSaveButton').attr('disabled',true);
+    $('input.pressingKey').keyup(function(){
+        if($(this).val().length !=0)
+            $('#paymentSaveButton').attr('disabled', false);
+        else
+            $('#paymentSaveButton').attr('disabled',true);
+    })
+
+    $('#paymentmodeOfPayment').change(function() {
+    var option = $(this).val();
+    if(option !='na') {
+        $('#paymentSaveButton').attr('disabled', false);
+    } else {
+        $('#paymentSaveButton').attr('disabled',true);
+    }
+    });
+});
+
 
 </script>
